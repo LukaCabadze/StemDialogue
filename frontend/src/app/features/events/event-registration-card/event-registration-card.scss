@@ -1,0 +1,42 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sd-space-16);
+  padding: var(--sd-space-24);
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius-feature);
+  background: var(--sd-page);
+  box-shadow: var(--sd-shadow-card);
+}
+
+.eyebrow {
+  display: inline-flex;
+  gap: var(--sd-space-8);
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--sd-pink-text);
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--sd-pink);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.closed {
+  padding: 12px 16px;
+  border-radius: var(--sd-radius-md);
+  background: var(--sd-soft);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sd-muted);
+  text-align: center;
+}

@@ -1,0 +1,11 @@
+<ol class="steps" role="list">
+  @for (step of steps(); track step.title; let index = $index) {
+    <li class="step">
+      <span class="number sd-digits" aria-hidden="true">{{ number(index) }}</span>
+      <span class="text">
+        <span class="sd-h4">{{ step.title }}</span>
+        <span class="sd-small">{{ step.text }}</span>
+      </span>
+    </li>
+  }
+</ol>

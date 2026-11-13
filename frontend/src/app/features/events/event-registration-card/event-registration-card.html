@@ -1,0 +1,47 @@
+@let copy = text().events;
+@let item = event();
+
+<aside class="card" [attr.aria-label]="copy.register">
+  <sd-lifecycle-stepper [status]="item.status" [hasArchive]="hasArchive()" />
+  <hr class="sd-divider" />
+
+  @if (item.status === 'Cancelled') {
+    <h2 class="sd-h3">{{ copy.cancelledTitle }}</h2>
+  } @else if (isUpcoming()) {
+    @if (canRegister()) {
+      <p class="eyebrow">
+        <span class="dot" aria-hidden="true"></span>
+        {{ deadlineText() }}
+      </p>
+    }
+    <h2 class="sd-h3">{{ copy.registerCta }}</h2>
+
+    <div class="actions">
+      @if (canRegister()) {
+        <sd-action-link [url]="item.registrationUrl!" [label]="copy.register" [block]="true" />
+      } @else if (item.registrationUrl) {
+        <p class="closed">{{ copy.registrationClosed }}</p>
+      }
+      @if (item.streamUrl) {
+        <sd-action-link [url]="item.streamUrl" [label]="copy.joinStream" variant="secondary" [block]="true" />
+      }
+      @if (calendarUrl(); as calendar) {
+        <a class="sd-btn sd-btn--secondary sd-btn--block" [href]="calendar" target="_blank" rel="noopener">
+          <sd-icon name="calendar-plus" />
+          {{ copy.addToCalendar }}
+        </a>
+      }
+    </div>
+  } @else {
+    <h2 class="sd-h3">{{ copy.heldSummaryTitle }}</h2>
+    <p class="sd-small">{{ copy.heldSummaryText }}</p>
+    @if (item.recordingUrl) {
+      <div class="actions">
+        <sd-action-link [url]="item.recordingUrl" [label]="copy.watchRecording" [block]="true" />
+      </div>
+    }
+  }
+
+  <hr class="sd-divider" />
+  <sd-share-buttons [path]="item.path" [showLabel]="true" />
+</aside>

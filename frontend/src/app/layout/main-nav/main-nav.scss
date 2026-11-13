@@ -1,0 +1,125 @@
+@use 'mixins' as *;
+
+.menu {
+  display: flex;
+  gap: 22px;
+  align-items: stretch;
+  margin: 0;
+}
+
+.item {
+  position: relative;
+  display: flex;
+}
+
+.link {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  padding: 28px 0 26px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--sd-nav);
+  white-space: nowrap;
+  transition:
+    color var(--sd-transition),
+    border-color var(--sd-transition);
+
+  &:hover,
+  &.is-active {
+    color: var(--sd-blue);
+  }
+
+  &.is-active {
+    border-bottom-color: var(--sd-blue);
+  }
+}
+
+.has-children:has(.sublink.is-active) .toggle {
+  color: var(--sd-blue);
+  border-bottom-color: var(--sd-blue);
+}
+
+.chevron {
+  transition: transform var(--sd-transition);
+}
+
+.is-open .chevron {
+  transform: rotate(180deg);
+}
+
+.submenu {
+  position: absolute;
+  top: calc(100% - 6px);
+  left: -16px;
+  z-index: 20;
+  display: none;
+  min-width: 220px;
+  margin: 0;
+  padding: var(--sd-space-8);
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius-lg);
+  background: var(--sd-page);
+  box-shadow: var(--sd-shadow-float);
+
+  .is-open & {
+    display: block;
+  }
+}
+
+.sublink {
+  display: block;
+  padding: 10px 12px;
+  border-radius: var(--sd-radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sd-nav);
+  transition:
+    background-color var(--sd-transition),
+    color var(--sd-transition);
+
+  &:hover,
+  &.is-active {
+    background: var(--sd-blue-tint);
+    color: var(--sd-blue);
+  }
+}
+
+// Mobile drawer variant
+:host(.is-stacked) {
+  .menu {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .item {
+    flex-direction: column;
+    border-bottom: 1px solid var(--sd-border-header);
+  }
+
+  .link {
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px 0;
+    border-bottom: 0;
+    font-size: 15px;
+  }
+
+  .submenu {
+    position: static;
+    min-width: 0;
+    margin-bottom: var(--sd-space-12);
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .sublink {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+}

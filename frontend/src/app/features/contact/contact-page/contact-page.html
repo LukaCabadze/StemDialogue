@@ -1,0 +1,69 @@
+@let copy = text().contact;
+
+@if (data(); as item) {
+  <sd-page-hero [crumbs]="crumbs()" [title]="item.page.title" [lead]="item.page.lead" />
+
+  <div class="sd-container body">
+    <div class="sd-detail-grid">
+      <div class="sd-stack">
+        <ul class="cards" role="list">
+          @for (line of lines(); track line.label) {
+            <li class="card">
+              <span class="icon-box" aria-hidden="true"><sd-icon [name]="line.icon" [size]="20" /></span>
+              <span class="card-text">
+                <span class="label">{{ line.label }}</span>
+                @if (line.href) {
+                  <a class="value value--link" [href]="line.href">{{ line.value }}</a>
+                } @else {
+                  <span class="value">{{ line.value }}</span>
+                }
+              </span>
+            </li>
+          }
+        </ul>
+        @if (item.page.bodyHtml) {
+          <sd-rich-text [html]="item.page.bodyHtml" />
+        }
+      </div>
+
+      <aside class="sd-sidebar">
+        @if (item.socialLinks.length > 0) {
+          <section class="sd-soft-card">
+            <h2 class="sd-overline">{{ copy.social }}</h2>
+            <ul class="social" role="list">
+              @for (social of item.socialLinks; track social.url) {
+                <li>
+                  <a [href]="social.url" target="_blank" rel="noopener">
+                    {{ social.platform }}
+                    <sd-icon name="arrow-up-right" [size]="16" />
+                    <span class="sd-sr-only">({{ text().common.newTab }})</span>
+                  </a>
+                </li>
+              }
+            </ul>
+          </section>
+        }
+        @if (item.contact.email; as email) {
+          <a class="sd-btn sd-btn--primary sd-btn--block" [href]="'mailto:' + email">
+            <sd-icon name="mail" />
+            {{ copy.writeUs }}
+          </a>
+        }
+      </aside>
+    </div>
+  </div>
+
+  <section class="sd-section sd-section--soft" [attr.aria-label]="text().home.partnersTitle">
+    <div class="sd-container">
+      <sd-partner-groups [funding]="item.funding" />
+    </div>
+  </section>
+} @else if (contact.error()) {
+  <div class="sd-container sd-section">
+    <sd-error-state [error]="contact.error()" (retry)="contact.reload()" />
+  </div>
+} @else {
+  <div class="sd-container sd-section">
+    <sd-loading-state layout="detail" />
+  </div>
+}

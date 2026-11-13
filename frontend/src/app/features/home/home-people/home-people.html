@@ -1,0 +1,40 @@
+@let copy = text().home;
+
+<section class="sd-section" aria-labelledby="home-people-title">
+  <div class="sd-container">
+    <sd-section-header
+      [index]="index()"
+      [overline]="copy.peopleOverline"
+      [title]="copy.peopleTitle"
+      [lead]="copy.peopleLead"
+      headingId="home-people-title"
+    />
+    <ul class="grid" role="list">
+      @for (entry of entries(); track entry.key) {
+        <li class="card">
+          <div class="faces" aria-hidden="true">
+            @for (photo of photos(entry); track photo.id) {
+              <img [src]="photo.url" alt="" loading="lazy" />
+            }
+            @for (placeholder of placeholders(entry); track placeholder) {
+              <span class="face"></span>
+            }
+            @if (entry.count > photos(entry).length && photos(entry).length > 0) {
+              <span class="face face--count sd-digits">+{{ entry.count - photos(entry).length }}</span>
+            }
+          </div>
+          <h3 class="title">
+            <a [routerLink]="entry.path">{{ entry.title }}</a>
+          </h3>
+          @if (entry.lead) {
+            <p class="sd-small">{{ entry.lead }}</p>
+          }
+          <span class="sd-text-link link" aria-hidden="true">
+            {{ copy.peopleLink }}
+            <sd-icon name="arrow-right" />
+          </span>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

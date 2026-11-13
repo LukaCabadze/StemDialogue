@@ -1,0 +1,58 @@
+@use 'mixins' as *;
+
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius-lg);
+}
+
+table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: var(--sd-space-16) 20px;
+  border-bottom: 1px solid var(--sd-border);
+  text-align: left;
+  vertical-align: middle;
+}
+
+tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+thead th {
+  background: var(--sd-soft);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.55px;
+  text-transform: uppercase;
+  color: var(--sd-muted);
+}
+
+.name {
+  width: 33%;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--sd-ink);
+
+  a:hover {
+    color: var(--sd-blue);
+  }
+}
+
+.role {
+  font-size: 13px;
+  line-height: 20.8px;
+  color: var(--sd-muted);
+}
+
+.period {
+  width: 28%;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--sd-muted);
+}

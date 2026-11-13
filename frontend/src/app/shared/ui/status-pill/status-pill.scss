@@ -1,0 +1,39 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding-inline: var(--sd-space-12);
+  border-radius: var(--sd-radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+:host(.status--planned) {
+  background: var(--sd-status-planned-bg);
+  color: var(--sd-status-planned);
+}
+
+:host(.status--completed) {
+  background: var(--sd-status-completed-bg);
+  color: var(--sd-status-completed);
+}
+
+:host(.status--cancelled) {
+  background: var(--sd-status-cancelled-bg);
+  color: var(--sd-status-cancelled);
+}
+
+:host(.status--postponed) {
+  background: var(--sd-status-postponed-bg);
+  color: var(--sd-status-postponed);
+}

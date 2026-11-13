@@ -1,0 +1,42 @@
+@use 'mixins' as *;
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sd-space-8);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sd-space-8);
+  height: 40px;
+  padding-inline: var(--sd-space-16);
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius-pill);
+  background: var(--sd-page);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sd-ink);
+  transition:
+    background-color var(--sd-transition),
+    border-color var(--sd-transition),
+    color var(--sd-transition);
+  @include focus-ring;
+
+  &:hover {
+    border-color: var(--sd-border-strong);
+  }
+
+  &.is-active {
+    border-color: var(--sd-ink);
+    background: var(--sd-ink);
+    color: var(--sd-on-brand);
+  }
+}
+
+.count {
+  font-family: var(--sd-font-digits);
+  font-size: 11px;
+  opacity: 0.7;
+}

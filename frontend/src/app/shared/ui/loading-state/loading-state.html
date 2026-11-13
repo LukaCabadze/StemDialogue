@@ -1,0 +1,29 @@
+<span class="sd-sr-only">{{ text().common.loading }}</span>
+
+@switch (layout()) {
+  @case ('detail') {
+    <div class="detail" aria-hidden="true">
+      <div class="column">
+        <span class="bar bar--title"></span>
+        <span class="bar"></span>
+        <span class="bar bar--short"></span>
+        <span class="block block--tall"></span>
+      </div>
+      <span class="block block--side"></span>
+    </div>
+  }
+  @case ('list') {
+    <div class="list" aria-hidden="true">
+      @for (block of blocks(); track block) {
+        <span class="block block--row"></span>
+      }
+    </div>
+  }
+  @default {
+    <div class="cards" aria-hidden="true">
+      @for (block of blocks(); track block) {
+        <span class="block block--card"></span>
+      }
+    </div>
+  }
+}

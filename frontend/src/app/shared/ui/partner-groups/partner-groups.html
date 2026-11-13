@@ -1,0 +1,33 @@
+@let copy = text().partners;
+@let item = funding();
+
+@if (item.funders.length > 0) {
+  <div class="group">
+    <h3 class="label">{{ copy.funder }}</h3>
+    <ul class="logos" role="list">
+      @for (partner of item.funders; track partner.organizationId) {
+        <li><sd-partner-card [partner]="partner" /></li>
+      }
+    </ul>
+  </div>
+}
+@if (item.partners.length > 0) {
+  <div class="group">
+    <h3 class="label">{{ copy.universities }}</h3>
+    <ul class="logos" role="list">
+      @for (partner of item.partners; track partner.organizationId) {
+        <li><sd-partner-card [partner]="partner" /></li>
+      }
+    </ul>
+  </div>
+}
+@if (item.supporters.length > 0) {
+  <div class="group">
+    <h3 class="label">{{ copy.supporters }}</h3>
+    <ul class="logos" role="list">
+      @for (partner of item.supporters; track partner.organizationId) {
+        <li><sd-partner-card [partner]="partner" /></li>
+      }
+    </ul>
+  </div>
+}

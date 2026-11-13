@@ -1,0 +1,69 @@
+@let item = event();
+
+<article class="card">
+  <header class="top">
+    <sd-date-chip [date]="item.startsAt" />
+    <div class="heading">
+      <div class="sd-pill-row">
+        <sd-status-pill [status]="item.status" [label]="item.statusLabel" />
+        <sd-pill>{{ item.formatLabel }}</sd-pill>
+      </div>
+      <a class="title-link" [routerLink]="item.path">
+        @if (headingLevel() === 2) {
+          <h2 class="sd-h3 title">{{ item.title }}</h2>
+        } @else {
+          <h3 class="sd-h3 title">{{ item.title }}</h3>
+        }
+      </a>
+    </div>
+  </header>
+
+  <ul class="meta" role="list">
+    <li>
+      <sd-icon name="clock" [size]="15" />
+      <span>{{ time() }}@if (item.venue) { · {{ item.venue }} }</span>
+    </li>
+    @if (disciplines()) {
+      <li>
+        <sd-icon name="atom" [size]="15" />
+        <span>{{ disciplines() }}</span>
+      </li>
+    }
+  </ul>
+
+  @if (speaker(); as person) {
+    <div class="speaker">
+      <sd-avatar [name]="person.fullName" [photo]="person.photo" [size]="40" />
+      <div class="speaker-text">
+        <p class="speaker-name">{{ person.fullName }}</p>
+        @if (person.academicTitle || person.organization) {
+          <p class="speaker-role">
+            {{ person.academicTitle }}@if (person.academicTitle && person.organization) { · }{{ person.organization }}
+          </p>
+        }
+      </div>
+    </div>
+  }
+
+  <footer class="footer">
+    @if (canRegister()) {
+      <a class="sd-text-link sd-text-link--sm action" [href]="item.registrationUrl" target="_blank" rel="noopener">
+        {{ text().events.register }}
+        <sd-icon name="arrow-up-right" [size]="16" />
+        <span class="sd-sr-only">({{ text().common.newTab }})</span>
+      </a>
+    } @else {
+      <a class="sd-text-link sd-text-link--sm action" [routerLink]="item.path">
+        {{ text().events.eventPage }}
+        <sd-icon name="arrow-right" [size]="16" />
+      </a>
+    }
+    <span class="footer-meta">
+      @if (item.hasRecording) {
+        <sd-icon name="video" [size]="14" />{{ text().events.recordingAvailable }}
+      } @else {
+        {{ item.typeLabel }}
+      }
+    </span>
+  </footer>
+</article>

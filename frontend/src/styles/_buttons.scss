@@ -1,0 +1,121 @@
+@use 'mixins' as *;
+
+// Buttons and text links from the Figma component sheet.
+.sd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sd-space-8);
+  height: 48px;
+  padding-inline: 22px;
+  border: 1px solid transparent;
+  border-radius: var(--sd-radius-md);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    background-color var(--sd-transition),
+    border-color var(--sd-transition),
+    color var(--sd-transition),
+    transform var(--sd-transition);
+  @include focus-ring;
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &[disabled],
+  &[aria-disabled='true'] {
+    opacity: 0.55;
+    pointer-events: none;
+  }
+}
+
+.sd-btn--primary {
+  background: var(--sd-blue);
+  color: var(--sd-on-brand);
+
+  &:hover {
+    background: var(--sd-blue-deep);
+  }
+}
+
+.sd-btn--secondary {
+  background: var(--sd-page);
+  border-color: var(--sd-border-strong);
+  color: var(--sd-blue);
+
+  &:hover {
+    border-color: var(--sd-blue);
+    background: var(--sd-blue-tint);
+  }
+}
+
+.sd-btn--ghost-dark {
+  background: transparent;
+  border-color: var(--sd-night-border);
+  color: var(--sd-on-brand);
+
+  &:hover {
+    background: var(--sd-night-card);
+  }
+}
+
+.sd-btn--sm {
+  height: 40px;
+  padding-inline: var(--sd-space-16);
+  border-radius: var(--sd-radius-sm);
+  font-size: 13px;
+}
+
+.sd-btn--block {
+  width: 100%;
+}
+
+.sd-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sd-space-8);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--sd-blue);
+  border-radius: 4px;
+  @include focus-ring;
+
+  sd-icon {
+    transition: transform var(--sd-transition);
+  }
+
+  &:hover sd-icon {
+    transform: translateX(3px);
+  }
+}
+
+.sd-text-link--sm {
+  font-size: 13px;
+}
+
+.sd-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius-md);
+  background: var(--sd-page);
+  color: var(--sd-blue);
+  font-size: 12px;
+  font-weight: 700;
+  transition:
+    border-color var(--sd-transition),
+    background-color var(--sd-transition);
+  @include focus-ring;
+
+  &:hover {
+    border-color: var(--sd-blue);
+    background: var(--sd-blue-tint);
+  }
+}

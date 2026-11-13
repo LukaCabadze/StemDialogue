@@ -1,0 +1,66 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height: 100%;
+  padding: var(--sd-space-24);
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius-card);
+  background: var(--sd-page);
+  transition:
+    border-color var(--sd-transition),
+    box-shadow var(--sd-transition);
+
+  &:has(a):hover {
+    border-color: var(--sd-border-strong);
+    box-shadow: var(--sd-shadow-card);
+  }
+
+  &:focus-within {
+    border-color: var(--sd-blue);
+  }
+}
+
+.portrait {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  overflow: hidden;
+  border-radius: var(--sd-radius-chip);
+  background: var(--sd-portrait-gradient);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.role {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--sd-pink-text);
+}
+
+.name {
+  margin-top: -8px;
+
+  a {
+    outline: none;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+    }
+  }
+}

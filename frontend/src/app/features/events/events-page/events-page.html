@@ -1,0 +1,30 @@
+@let copy = text().events;
+
+<sd-page-hero [crumbs]="crumbs()" [title]="copy.title" [lead]="copy.lead">
+  <sd-event-filters
+    [facets]="facets.hasValue() ? facets.value() : null"
+    [values]="values()"
+    (changed)="applyFilters($event)"
+  />
+</sd-page-hero>
+
+<section class="sd-container results" [attr.aria-busy]="events.isLoading()">
+  @if (events.error() && events.items().length === 0) {
+    <sd-error-state [error]="events.error()" (retry)="events.reload()" />
+  } @else if (events.isFirstLoad() && events.items().length === 0) {
+    <sd-loading-state />
+  } @else if (events.items().length === 0) {
+    <sd-empty-state icon="calendar" [title]="copy.empty">
+      <button type="button" class="sd-btn sd-btn--secondary sd-btn--sm" (click)="resetFilters()">
+        {{ text().common.resetFilters }}
+      </button>
+    </sd-empty-state>
+  } @else {
+    <ul class="grid" role="list">
+      @for (event of events.items(); track event.slug) {
+        <li><sd-event-card [event]="event" [headingLevel]="2" /></li>
+      }
+    </ul>
+    <sd-load-more [hasMore]="events.hasMore()" [loading]="events.isLoading()" (more)="events.loadMore()" />
+  }
+</section>

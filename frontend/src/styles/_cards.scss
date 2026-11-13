@@ -1,0 +1,52 @@
+// Shared surfaces used by several feature sidebars.
+.sd-soft-card {
+  padding: var(--sd-space-24);
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius-card);
+  background: var(--sd-soft);
+
+  > .sd-overline + * {
+    margin-top: var(--sd-space-12);
+  }
+}
+
+.sd-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sd-space-8);
+}
+
+.sd-divider {
+  height: 1px;
+  border: 0;
+  margin: 0;
+  background: var(--sd-border);
+}
+
+/** List with pink ✦ markers ("რას გაიგებ", "წვლილი პროექტში"). */
+.sd-sparkle-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sd-space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  > li {
+    position: relative;
+    padding-left: 20px;
+    font-size: 15px;
+    line-height: 25.5px;
+    color: var(--sd-muted);
+
+    &::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      top: 2px;
+      font-size: 12px;
+      line-height: 20.4px;
+      color: var(--sd-pink);
+    }
+  }
+}

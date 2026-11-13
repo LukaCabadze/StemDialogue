@@ -1,0 +1,18 @@
+@let copy = text().people;
+
+<sd-empty-state icon="users" [title]="copy.formerTitle" [text]="copy.formerText">
+  <button
+    type="button"
+    class="sd-text-link toggle"
+    [attr.aria-expanded]="expanded()"
+    aria-controls="former-members-table"
+    (click)="toggle()"
+  >
+    {{ expanded() ? copy.hideFormer : copy.showFormer }}
+    <span aria-hidden="true">{{ expanded() ? '↑' : '→' }}</span>
+  </button>
+</sd-empty-state>
+
+<div id="former-members-table" class="table" [hidden]="!expanded()">
+  <sd-staff-table [members]="members()" [caption]="copy.formerTitle" />
+</div>

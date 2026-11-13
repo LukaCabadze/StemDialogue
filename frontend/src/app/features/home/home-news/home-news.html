@@ -1,0 +1,19 @@
+@let copy = text().home;
+
+<section class="sd-section" aria-labelledby="home-news-title">
+  <div class="sd-container">
+    <sd-section-header
+      [index]="index()"
+      [overline]="copy.newsOverline"
+      [title]="copy.newsTitle"
+      [linkLabel]="copy.newsLink"
+      [linkPath]="listPath()"
+      headingId="home-news-title"
+    />
+    <ul class="grid" role="list">
+      @for (item of news(); track item.slug; let index = $index) {
+        <li><sd-news-card [news]="item" [variant]="variantAt(index)" /></li>
+      }
+    </ul>
+  </div>
+</section>

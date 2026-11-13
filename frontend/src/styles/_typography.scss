@@ -1,0 +1,102 @@
+@use 'mixins' as *;
+
+// Type scale from the Figma foundations page.
+.sd-display {
+  font-size: 56px;
+  line-height: 68.32px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  color: var(--sd-blue);
+
+  @include mobile {
+    font-size: 38px;
+    line-height: 46px;
+    letter-spacing: -1px;
+  }
+}
+
+.sd-h1 {
+  font-size: 40px;
+  line-height: 52px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: var(--sd-ink);
+
+  @include mobile {
+    font-size: 30px;
+    line-height: 39px;
+    letter-spacing: -0.5px;
+  }
+}
+
+.sd-h2 {
+  font-size: 32px;
+  line-height: 43.2px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--sd-ink);
+
+  @include mobile {
+    font-size: 26px;
+    line-height: 35px;
+  }
+}
+
+.sd-h2-sm {
+  font-size: 22px;
+  line-height: 31.9px;
+  font-weight: 600;
+  color: var(--sd-ink);
+}
+
+.sd-h3 {
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: 600;
+  color: var(--sd-ink);
+}
+
+.sd-h4 {
+  font-size: 15px;
+  line-height: 22.5px;
+  font-weight: 600;
+  color: var(--sd-ink);
+}
+
+.sd-lead {
+  font-size: 17px;
+  line-height: 29.75px;
+  color: var(--sd-muted);
+}
+
+.sd-body {
+  font-size: 15px;
+  line-height: 26.25px;
+  color: var(--sd-muted);
+}
+
+.sd-small {
+  font-size: 13px;
+  line-height: 20.8px;
+  color: var(--sd-muted);
+}
+
+.sd-meta {
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--sd-muted);
+}
+
+.sd-overline {
+  font-size: 11px;
+  line-height: 15.4px;
+  font-weight: 700;
+  letter-spacing: 0.66px;
+  text-transform: uppercase;
+  color: var(--sd-blue);
+}
+
+.sd-digits {
+  font-family: var(--sd-font-digits);
+}

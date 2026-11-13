@@ -1,0 +1,16 @@
+@if (safeEmbed(); as player) {
+  <div class="player">
+    <iframe
+      [src]="player"
+      [title]="title()"
+      loading="lazy"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  </div>
+} @else if (recordingUrl(); as url) {
+  <a class="poster" [href]="url" target="_blank" rel="noopener">
+    <sd-cover-art variant="blue" [image]="cover()" [showPlay]="true" [label]="text().events.recording" />
+    <span class="sd-sr-only">{{ text().events.watchRecording }}: {{ title() }} ({{ text().common.newTab }})</span>
+  </a>
+}

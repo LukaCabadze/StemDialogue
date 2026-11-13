@@ -1,0 +1,24 @@
+@let item = activity();
+
+<article class="card">
+  <div class="cover">
+    <sd-cover-art [variant]="variant()" [image]="item.cover" />
+  </div>
+  <div class="body">
+    @if (place()) {
+      <p class="place">
+        <sd-icon name="school" [size]="15" />
+        {{ place() }}
+      </p>
+    }
+    <a class="title-link" [routerLink]="item.path">
+      <h2 class="sd-h3">{{ item.title }}</h2>
+    </a>
+    @if (item.summary) {
+      <p class="sd-small summary">{{ item.summary }}</p>
+    }
+    @if (item.activityDate) {
+      <time class="sd-meta" [attr.datetime]="item.activityDate">{{ item.activityDate | sdDate: 'long' : language() }}</time>
+    }
+  </div>
+</article>

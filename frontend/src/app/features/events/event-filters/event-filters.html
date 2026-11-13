@@ -1,0 +1,45 @@
+@let copy = text().events;
+@let current = values();
+
+<div class="filters">
+  <sd-filter-chips
+    [options]="scopes()"
+    [value]="current.scope"
+    (valueChange)="setScope($event)"
+    [label]="copy.title"
+  />
+
+  <div class="controls">
+    <label class="select">
+      <span class="sd-sr-only">{{ copy.allYears }}</span>
+      <select (change)="setSelect('year', $any($event.target).value)">
+        <option value="">{{ copy.allYears }}</option>
+        @for (year of facets()?.years ?? []; track year) {
+          <option [value]="year" [selected]="current.year === '' + year">{{ year }}</option>
+        }
+      </select>
+    </label>
+
+    <label class="select">
+      <span class="sd-sr-only">{{ copy.allDisciplines }}</span>
+      <select (change)="setSelect('discipline', $any($event.target).value)">
+        <option value="">{{ copy.allDisciplines }}</option>
+        @for (term of facets()?.disciplines ?? []; track term.slug) {
+          <option [value]="term.slug" [selected]="current.discipline === term.slug">{{ term.name }}</option>
+        }
+      </select>
+    </label>
+
+    <label class="select">
+      <span class="sd-sr-only">{{ copy.allFormats }}</span>
+      <select (change)="setSelect('format', $any($event.target).value)">
+        <option value="">{{ copy.allFormats }}</option>
+        @for (format of facets()?.formats ?? []; track format.value) {
+          <option [value]="format.value" [selected]="current.format === format.value">{{ format.label }}</option>
+        }
+      </select>
+    </label>
+
+    <sd-search-box class="search" [placeholder]="copy.searchPlaceholder" [value]="current.q ?? ''" (search)="setSearch($event)" />
+  </div>
+</div>

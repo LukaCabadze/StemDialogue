@@ -1,0 +1,20 @@
+@let copy = text().home;
+@let item = teaser();
+
+<section class="sd-section" aria-labelledby="home-ambassadors-title">
+  <div class="sd-container grid">
+    <div class="intro">
+      <p class="sd-overline">{{ index() }} · {{ copy.ambassadorsOverline }}</p>
+      <h2 id="home-ambassadors-title" class="sd-h2">{{ item.title }}</h2>
+      @if (item.lead) {
+        <p class="sd-body">{{ item.lead }}</p>
+      }
+      <a class="sd-btn sd-btn--secondary" [routerLink]="item.path">
+        {{ copy.ambassadorsButton }}
+        <sd-icon name="arrow-right" />
+      </a>
+    </div>
+
+    <sd-numbered-steps [steps]="copy.ambassadorSteps" />
+  </div>
+</section>

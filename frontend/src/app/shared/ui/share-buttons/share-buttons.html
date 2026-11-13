@@ -1,0 +1,17 @@
+@if (showLabel()) {
+  <span class="label">{{ text().events.share }}</span>
+}
+<div class="buttons">
+  <a class="sd-icon-button" [href]="facebookUrl()" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+  <a class="sd-icon-button" [href]="linkedInUrl()" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+  <button
+    type="button"
+    class="sd-icon-button"
+    [attr.aria-label]="copied() ? text().common.linkCopied : text().common.copyLink"
+    [attr.title]="copied() ? text().common.linkCopied : text().common.copyLink"
+    (click)="copy()"
+  >
+    <sd-icon [name]="copied() ? 'check' : 'link'" [size]="18" />
+  </button>
+</div>
+<span class="sd-sr-only" aria-live="polite">{{ copied() ? text().common.linkCopied : '' }}</span>

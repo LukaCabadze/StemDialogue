@@ -1,0 +1,91 @@
+@use 'mixins' as *;
+
+.card {
+  position: sticky;
+  top: calc(var(--sd-header-height) + 24px);
+  overflow: hidden;
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius-xl);
+  background: var(--sd-page);
+
+  @include tablet-down {
+    position: static;
+  }
+}
+
+.portrait {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  background: linear-gradient(138deg, #dce6f9 0%, #f7dce8 100%);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sd-space-16);
+  padding: var(--sd-space-24);
+}
+
+.name {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 31.9px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+
+  dt {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.44px;
+    text-transform: uppercase;
+    color: var(--sd-muted);
+  }
+
+  dd {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 21px;
+  }
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sd-space-12);
+  margin: 0;
+}
+
+.link {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px var(--sd-space-12);
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sd-blue);
+  transition:
+    border-color var(--sd-transition),
+    background-color var(--sd-transition);
+  @include focus-ring;
+
+  &:hover {
+    border-color: var(--sd-blue);
+    background: var(--sd-blue-tint);
+  }
+}

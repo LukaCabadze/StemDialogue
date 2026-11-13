@@ -1,0 +1,25 @@
+@let copy = text().funding;
+
+<p class="strip">
+  @if (funderParts().length > 0 || partnerParts().length > 0) {
+    @if (funderParts().length > 0) {
+      <span>
+        {{ copy.implementedWith }}
+        @for (part of funderParts(); track part.name) {<strong>{{ part.name }}</strong>{{ part.after }}}
+        {{ copy.fundedBy }}
+      </span>
+    }
+    @if (funderParts().length > 0 && partnerParts().length > 0) {
+      <span class="dot" aria-hidden="true"></span>
+    }
+    @if (partnerParts().length > 0) {
+      <span>
+        {{ copy.partnershipPrefix }}
+        @for (part of partnerParts(); track part.name) {<strong>{{ part.name }}</strong>{{ part.after }}}
+      </span>
+    }
+  } @else if (fallback()) {
+    <span>{{ fallback() }}</span>
+  }
+  <a class="details" [routerLink]="aboutPath()" fragment="funding">{{ copy.details }} →</a>
+</p>

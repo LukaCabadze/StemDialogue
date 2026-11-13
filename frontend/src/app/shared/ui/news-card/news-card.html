@@ -1,0 +1,21 @@
+@let item = news();
+
+<article class="card">
+  <div class="cover">
+    <sd-cover-art [variant]="coverVariant()" [image]="item.cover" [label]="item.cover ? null : item.categoryLabel" />
+  </div>
+  <div class="body">
+    <div class="meta-row">
+      <sd-pill [tone]="categoryTone()">{{ item.categoryLabel }}</sd-pill>
+      <time class="sd-meta" [attr.datetime]="item.publishedAt">{{ item.publishedAt | sdDate: 'long' : language() }}</time>
+    </div>
+    <a class="title-link" [routerLink]="item.path">
+      @if (headingLevel() === 2) {
+        <h2 class="sd-h3 title">{{ item.title }}</h2>
+      } @else {
+        <h3 class="sd-h3 title">{{ item.title }}</h3>
+      }
+    </a>
+    <p class="sd-small summary">{{ item.summary }}</p>
+  </div>
+</article>

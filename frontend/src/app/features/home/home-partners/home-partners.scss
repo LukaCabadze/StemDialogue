@@ -1,0 +1,30 @@
+@use 'mixins' as *;
+
+.partners-section {
+  padding-top: 0;
+}
+
+.box {
+  display: grid;
+  grid-template-columns: minmax(0, 398px) minmax(0, 1fr);
+  gap: 48px;
+  padding: 40px;
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius-xl);
+  background: linear-gradient(180deg, var(--sd-page) 0%, #f9fbff 100%);
+
+  @include tablet-down {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  @include mobile {
+    padding: 24px;
+  }
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sd-space-12);
+}

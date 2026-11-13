@@ -1,0 +1,19 @@
+<div class="text">
+  <p class="sd-overline overline">
+    @if (index(); as number) {
+      {{ number }} ·
+    }
+    {{ overline() }}
+  </p>
+  <h2 class="sd-h2 title" [attr.id]="headingId()">{{ title() }}</h2>
+  @if (lead(); as leadText) {
+    <p class="sd-body lead">{{ leadText }}</p>
+  }
+</div>
+
+@if (linkLabel() && linkPath()) {
+  <a class="sd-text-link link" [routerLink]="linkPath()" [queryParams]="linkQuery()">
+    {{ linkLabel() }}
+    <sd-icon name="arrow-right" />
+  </a>
+}

@@ -1,0 +1,17 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sd-space-12);
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sd-muted);
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}

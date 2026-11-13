@@ -1,0 +1,24 @@
+<ol class="timeline" role="list">
+  @for (milestone of milestones(); track milestone.id) {
+    <li
+      class="item"
+      [class.is-done]="milestone.state === 'Done'"
+      [class.is-current]="milestone.state === 'Current'"
+      [attr.aria-current]="milestone.state === 'Current' ? 'step' : null"
+    >
+      <span class="marker" aria-hidden="true"></span>
+      <div class="content">
+        @if (milestone.periodLabel) {
+          <p class="period sd-digits">{{ milestone.periodLabel }}</p>
+        }
+        <h3 class="sd-h3">{{ milestone.title }}</h3>
+        @if (milestone.description) {
+          <p class="sd-body">{{ milestone.description }}</p>
+        }
+        @if (milestone.location) {
+          <p class="sd-meta">{{ milestone.location }}</p>
+        }
+      </div>
+    </li>
+  }
+</ol>

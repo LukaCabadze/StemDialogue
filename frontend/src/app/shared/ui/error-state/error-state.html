@@ -1,0 +1,18 @@
+<span class="icon-box" aria-hidden="true">
+  <sd-icon [name]="notFound() ? 'search' : 'calendar-alert'" [size]="22" />
+</span>
+
+@if (notFound()) {
+  <h1 class="sd-h2-sm">{{ text().common.notFoundTitle }}</h1>
+  <p class="sd-body">{{ text().common.notFoundText }}</p>
+  <a class="sd-btn sd-btn--primary" [routerLink]="homePath()">
+    {{ text().common.backHome }}
+    <sd-icon name="arrow-right" />
+  </a>
+} @else {
+  <h2 class="sd-h2-sm">{{ text().common.errorTitle }}</h2>
+  <p class="sd-body">{{ text().common.errorText }}</p>
+  <button type="button" class="sd-btn sd-btn--secondary" (click)="retry.emit()">
+    {{ text().common.retry }}
+  </button>
+}

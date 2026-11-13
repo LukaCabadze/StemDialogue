@@ -1,0 +1,56 @@
+@if (data(); as homeData) {
+  @let index = sectionIndex();
+
+  <sd-home-hero
+    [hero]="homeData.hero"
+    [tagline]="site.site()?.tagline ?? null"
+    [projectYears]="site.projectYears()"
+    [nextEvent]="homeData.upcomingEvents[0] ?? null"
+  />
+
+  @if (homeData.about; as about) {
+    <sd-home-about [about]="about" [disciplines]="disciplines()" [index]="index.about ?? '01'" />
+  }
+
+  @if (homeData.featured; as featured) {
+    <sd-home-featured [featured]="featured" />
+  }
+
+  <sd-home-upcoming
+    [events]="homeData.upcomingEvents"
+    [listPath]="project.path('stem-saturdays')"
+    [index]="index.upcoming ?? '02'"
+  />
+
+  @if (homeData.latestNews.length > 0) {
+    <sd-home-news [news]="homeData.latestNews" [listPath]="project.path('news')" [index]="index.news ?? '03'" />
+  }
+
+  @if (!homeData.archive.isEmpty) {
+    <sd-home-archive
+      [archive]="homeData.archive"
+      [archivePath]="project.path('stem-saturdays')"
+      [index]="index.archive ?? '04'"
+    />
+  }
+
+  @if (homeData.people.length > 0) {
+    <sd-home-people [entries]="homeData.people" [index]="index.people ?? '05'" />
+  }
+
+  @if (homeData.ambassadors; as ambassadors) {
+    <sd-home-ambassadors [teaser]="ambassadors" [index]="index.ambassadors ?? '06'" />
+  }
+
+  @if (index.partners) {
+    <sd-home-partners [funding]="homeData.funding" [index]="index.partners" />
+  }
+} @else if (home.error()) {
+  <div class="sd-container sd-section">
+    <sd-error-state [error]="home.error()" (retry)="home.reload()" />
+  </div>
+} @else {
+  <div class="sd-container sd-section">
+    <sd-loading-state layout="detail" />
+  </div>
+}

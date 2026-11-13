@@ -1,0 +1,37 @@
+@use 'mixins' as *;
+
+:host {
+  display: flex;
+  gap: var(--sd-space-16);
+  align-items: center;
+  padding: 28px;
+  border: 1px dashed var(--sd-border-strong);
+  border-radius: var(--sd-radius-lg);
+  background: var(--sd-soft);
+
+  @include mobile {
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+}
+
+.icon-box {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--sd-radius-chip);
+  background: var(--sd-page);
+  color: var(--sd-blue);
+}
+
+.text {
+  flex: 1;
+  min-width: 0;
+}
+
+.link {
+  flex-shrink: 0;
+}

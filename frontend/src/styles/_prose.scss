@@ -1,0 +1,112 @@
+// Rich text produced by the CMS (already sanitised by the API, re-sanitised by Angular).
+.sd-prose {
+  font-size: 16px;
+  line-height: 29.6px;
+  color: var(--sd-muted);
+  overflow-wrap: anywhere;
+
+  > * + * {
+    margin-top: 18px;
+  }
+
+  h2 {
+    font-size: 22px;
+    line-height: 31.9px;
+    font-weight: 600;
+    color: var(--sd-ink);
+  }
+
+  h3 {
+    font-size: 18px;
+    line-height: 27px;
+    font-weight: 600;
+    color: var(--sd-ink);
+  }
+
+  h4 {
+    font-size: 15px;
+    line-height: 22.5px;
+    font-weight: 600;
+    color: var(--sd-ink);
+  }
+
+  strong,
+  b {
+    color: var(--sd-ink);
+    font-weight: 600;
+  }
+
+  a {
+    color: var(--sd-blue);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  ul {
+    padding: 0;
+    list-style: none;
+
+    > li {
+      position: relative;
+      padding-left: 20px;
+      font-size: 15px;
+      line-height: 25.5px;
+
+      & + li {
+        margin-top: 8px;
+      }
+
+      &::before {
+        content: '✦';
+        position: absolute;
+        left: 0;
+        top: 2px;
+        font-size: 12px;
+        line-height: 20.4px;
+        color: var(--sd-pink);
+      }
+    }
+  }
+
+  ol {
+    padding-left: 22px;
+
+    > li + li {
+      margin-top: 8px;
+    }
+  }
+
+  blockquote {
+    padding: 6px 0 6px var(--sd-space-24);
+    border-left: 3px solid var(--sd-pink);
+    font-size: 20px;
+    line-height: 32px;
+    font-weight: 600;
+    color: var(--sd-ink);
+  }
+
+  img {
+    border-radius: var(--sd-radius-feature);
+  }
+
+  figcaption {
+    margin-top: 10px;
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 500;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+
+    th,
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--sd-border);
+      text-align: left;
+    }
+  }
+}

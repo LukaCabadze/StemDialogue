@@ -1,0 +1,41 @@
+@use 'mixins' as *;
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 340fr) minmax(0, 804fr);
+  gap: 56px;
+  align-items: start;
+  padding-bottom: var(--sd-space-88);
+
+  @include tablet-down {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.subheading {
+  padding-top: var(--sd-space-8);
+}
+
+.events {
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius-card);
+  background: var(--sd-page);
+
+  li + li {
+    border-top: 1px solid var(--sd-border);
+  }
+}
+
+.resources {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sd-space-24);
+  margin: 0;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}

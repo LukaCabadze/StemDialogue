@@ -1,0 +1,34 @@
+@let copy = text().news;
+@let item = article();
+
+@if (item.relatedEvent; as event) {
+  <section class="sd-soft-card">
+    <h2 class="sd-overline">{{ copy.relatedEvent }}</h2>
+    <div class="event">
+      <sd-date-chip [date]="event.startsAt" />
+      <div class="event-text">
+        <sd-status-pill [status]="event.status" [label]="event.statusLabel" />
+        <h3 class="sd-h4">{{ event.title }}</h3>
+        <a class="sd-text-link sd-text-link--sm" [routerLink]="event.path">
+          {{ text().events.eventPage }}
+          <sd-icon name="arrow-right" />
+        </a>
+      </div>
+    </div>
+  </section>
+}
+
+@if (categories().length > 0) {
+  <section class="sd-soft-card">
+    <h2 class="sd-overline">{{ copy.categories }}</h2>
+    <ul class="sd-pill-row" role="list">
+      @for (category of categories(); track category.value) {
+        <li>
+          <a [routerLink]="listPath()" [queryParams]="{ category: category.value }">
+            <sd-pill [tone]="category.value === item.category ? 'blue' : 'outline'">{{ category.label }}</sd-pill>
+          </a>
+        </li>
+      }
+    </ul>
+  </section>
+}

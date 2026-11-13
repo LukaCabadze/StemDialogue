@@ -1,0 +1,10 @@
+<sd-icon class="icon" name="calendar-alert" [size]="20" />
+<div>
+  <p class="title">{{ title() }}</p>
+  @if (event().statusNote; as note) {
+    <p class="sd-small">{{ note }}</p>
+  }
+  @if (dateLine(); as line) {
+    <p class="sd-small">{{ line }}</p>
+  }
+</div>

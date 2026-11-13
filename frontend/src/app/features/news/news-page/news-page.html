@@ -1,0 +1,24 @@
+@let copy = text().news;
+
+<sd-page-hero [crumbs]="crumbs()" [title]="copy.title" [lead]="copy.lead">
+  @if (options().length > 1) {
+    <sd-filter-chips [options]="options()" [value]="selected()" (valueChange)="selectCategory($event)" [label]="copy.categories" />
+  }
+</sd-page-hero>
+
+<section class="sd-container results" [attr.aria-busy]="news.isLoading()">
+  @if (news.error() && news.items().length === 0) {
+    <sd-error-state [error]="news.error()" (retry)="news.reload()" />
+  } @else if (news.isFirstLoad() && news.items().length === 0) {
+    <sd-loading-state />
+  } @else if (news.items().length === 0) {
+    <sd-empty-state icon="file-text" [title]="copy.empty" />
+  } @else {
+    <ul class="grid" role="list">
+      @for (item of news.items(); track item.slug) {
+        <li><sd-news-card [news]="item" [headingLevel]="2" /></li>
+      }
+    </ul>
+    <sd-load-more [hasMore]="news.hasMore()" [loading]="news.isLoading()" (more)="news.loadMore()" />
+  }
+</section>

@@ -1,0 +1,70 @@
+@use 'mixins' as *;
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius-card);
+  background: var(--sd-page);
+  transition:
+    border-color var(--sd-transition),
+    box-shadow var(--sd-transition);
+
+  &:hover {
+    border-color: var(--sd-border-strong);
+    box-shadow: var(--sd-shadow-card);
+  }
+
+  &:focus-within {
+    border-color: var(--sd-blue);
+  }
+}
+
+.cover {
+  height: 160px;
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px var(--sd-space-24) var(--sd-space-24);
+}
+
+.meta {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.title-link {
+  outline: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+}
+
+.description {
+  @include line-clamp(3);
+}
+
+.source {
+  margin-top: auto;
+  padding-top: var(--sd-space-12);
+  border-top: 1px solid var(--sd-border);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--sd-muted);
+}

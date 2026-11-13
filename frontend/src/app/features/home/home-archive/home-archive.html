@@ -1,0 +1,54 @@
+@let copy = text().home;
+
+<section class="sd-section archive" aria-labelledby="home-archive-title">
+  <div class="sd-container">
+    <sd-section-header
+      tone="dark"
+      [index]="index()"
+      [overline]="copy.archiveOverline"
+      [title]="copy.archiveTitle"
+      [linkLabel]="copy.archiveLink"
+      [linkPath]="archivePath()"
+      [linkQuery]="archiveQuery"
+      headingId="home-archive-title"
+    />
+
+    <div class="grid">
+      @if (highlight(); as event) {
+        <article class="recording">
+          <div class="cover">
+            <sd-cover-art
+              variant="blue"
+              [image]="event.cover"
+              [showPlay]="event.hasRecording"
+              [label]="event.hasRecording ? text().events.recording : null"
+            />
+          </div>
+          <div class="recording-body">
+            <div class="meta">
+              <sd-status-pill [status]="event.status" [label]="event.statusLabel" />
+              <time [attr.datetime]="event.startsAt">{{ event.startsAt | sdDate: 'long' : language() }}</time>
+            </div>
+            <h3 class="title">
+              <a [routerLink]="event.path">{{ event.title }}</a>
+            </h3>
+            @if (event.summary) {
+              <p class="summary">{{ event.summary }}</p>
+            }
+          </div>
+        </article>
+      }
+
+      @if (archive().resources.length > 0) {
+        <div class="resources">
+          <h3 class="resources-title">{{ copy.archiveResources }}</h3>
+          <ul role="list">
+            @for (resource of archive().resources; track resource.slug) {
+              <li><sd-resource-item [resource]="resource" tone="dark" /></li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  </div>
+</section>

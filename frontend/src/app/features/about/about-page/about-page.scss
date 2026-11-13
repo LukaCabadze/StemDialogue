@@ -1,0 +1,28 @@
+@use 'mixins' as *;
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sd-space-12);
+}
+
+.body {
+  padding-block: 56px var(--sd-space-88);
+}
+
+.funding {
+  display: grid;
+  grid-template-columns: minmax(0, 398px) minmax(0, 1fr);
+  gap: 48px;
+
+  @include tablet-down {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.funding-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sd-space-12);
+}

@@ -1,0 +1,104 @@
+@let copy = text().resources;
+
+@if (resource(); as item) {
+  <div class="sd-container">
+    <sd-breadcrumbs [items]="crumbs()" />
+    <div class="sd-detail-grid page">
+      <article class="sd-stack">
+        <div class="sd-pill-row">
+          <sd-pill tone="pink">
+            <sd-icon [name]="icon()" [size]="14" />
+            {{ item.typeLabel }}
+          </sd-pill>
+          @if (item.publishedAt) {
+            <time class="sd-meta" [attr.datetime]="item.publishedAt">{{ item.publishedAt | sdDate: 'long' : language() }}</time>
+          }
+        </div>
+        <h1 class="sd-h1">{{ item.title }}</h1>
+        @if (item.description) {
+          <p class="sd-lead">{{ item.description }}</p>
+        }
+
+        @if (embed(); as player) {
+          <div class="player">
+            <iframe [src]="player" [title]="item.title" loading="lazy" allowfullscreen></iframe>
+          </div>
+        } @else if (previewImage(); as image) {
+          <img class="preview" [src]="image.url" [alt]="image.alt || item.title" />
+        }
+
+        <div class="action">
+          <a class="sd-btn sd-btn--primary" [href]="item.file?.url ?? item.url" target="_blank" rel="noopener">
+            <sd-icon [name]="item.file ? 'download' : 'arrow-up-right'" />
+            {{ actionLabel() }}
+            @if (extension()) {
+              · {{ extension() }}
+            }
+            @if (item.file?.sizeBytes) {
+              · {{ item.file?.sizeBytes | fileSize }}
+            }
+            <span class="sd-sr-only">({{ text().common.newTab }})</span>
+          </a>
+        </div>
+      </article>
+
+      <aside class="sd-sidebar">
+        @if (item.event; as event) {
+          <section class="sd-soft-card">
+            <h2 class="sd-overline">{{ copy.fromEvent }}</h2>
+            <h3 class="sd-h4 sidebar-title"><a [routerLink]="event.path">{{ event.title }}</a></h3>
+            <time class="sd-meta" [attr.datetime]="event.startsAt">{{ event.startsAt | sdDate: 'long' : language() }}</time>
+          </section>
+        }
+        @if (item.author || item.authorName) {
+          <section class="sd-soft-card">
+            <h2 class="sd-overline">{{ copy.author }}</h2>
+            @if (item.author; as author) {
+              <h3 class="sd-h4 sidebar-title"><a [routerLink]="author.path">{{ author.fullName }}</a></h3>
+              @if (author.organization) {
+                <p class="sd-meta">{{ author.organization }}</p>
+              }
+            } @else {
+              <h3 class="sd-h4 sidebar-title">{{ item.authorName }}</h3>
+            }
+          </section>
+        }
+        @if (data()!.disciplines.length > 0 || item.tags.length > 0) {
+          <section class="sd-soft-card">
+            <h2 class="sd-overline">{{ text().events.topics }}</h2>
+            <ul class="sd-pill-row" role="list">
+              @for (term of data()!.disciplines; track term.slug) {
+                <li><sd-pill>{{ term.name }}</sd-pill></li>
+              }
+              @for (tag of item.tags; track tag.slug) {
+                <li><sd-pill>{{ tag.name }}</sd-pill></li>
+              }
+            </ul>
+          </section>
+        }
+        <section class="sd-soft-card">
+          <sd-share-buttons [path]="item.path" [showLabel]="true" />
+        </section>
+      </aside>
+    </div>
+
+    @if (data()!.related.length > 0) {
+      <section class="related" aria-labelledby="related-resources-title">
+        <h2 id="related-resources-title" class="sd-h2-sm">{{ copy.related }}</h2>
+        <ul class="related-grid" role="list">
+          @for (related of data()!.related; track related.slug) {
+            <li><sd-resource-item [resource]="related" /></li>
+          }
+        </ul>
+      </section>
+    }
+  </div>
+} @else if (detail.error()) {
+  <div class="sd-container sd-section">
+    <sd-error-state [error]="detail.error()" (retry)="detail.reload()" />
+  </div>
+} @else {
+  <div class="sd-container sd-section">
+    <sd-loading-state layout="detail" />
+  </div>
+}

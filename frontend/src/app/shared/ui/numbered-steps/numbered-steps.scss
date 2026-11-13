@@ -1,0 +1,37 @@
+@use 'mixins' as *;
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sd-space-12);
+  margin: 0;
+  padding: 36px;
+  border-radius: var(--sd-radius-xl);
+  background: var(--sd-pink-tint);
+
+  @include mobile {
+    padding: 20px;
+  }
+}
+
+.step {
+  display: flex;
+  gap: var(--sd-space-16);
+  align-items: flex-start;
+  padding: 20px;
+  border-radius: var(--sd-radius-chip);
+  background: var(--sd-page);
+}
+
+.number {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--sd-pink);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}

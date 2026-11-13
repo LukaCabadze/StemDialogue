@@ -1,0 +1,25 @@
+@let copy = text().people;
+
+<div class="table-wrap">
+  <table>
+    <caption class="sd-sr-only">{{ caption() }}</caption>
+    <thead>
+      <tr>
+        <th scope="col">{{ copy.tableName }}</th>
+        <th scope="col">{{ copy.tableRole }}</th>
+        <th scope="col">{{ copy.tablePeriod }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (member of members(); track member.slug) {
+        <tr>
+          <th scope="row" class="name">
+            <a [routerLink]="member.path">{{ member.fullName }}</a>
+          </th>
+          <td class="role">{{ member.roleTitle }}</td>
+          <td class="period">{{ period(member) }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

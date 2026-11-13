@@ -1,0 +1,43 @@
+@let copy = text();
+
+@if (overview.error() && !data()) {
+  <div class="sd-container sd-section">
+    <sd-error-state [error]="overview.error()" (retry)="overview.reload()" />
+  </div>
+} @else {
+  <sd-page-hero [crumbs]="crumbs()" [title]="title()" [lead]="data()?.page?.lead ?? null" />
+
+  <div class="sd-container intro">
+    <div class="sd-stack">
+      @if (data()?.page?.bodyHtml; as body) {
+        <sd-rich-text [html]="body" />
+      }
+    </div>
+    <sd-numbered-steps [steps]="copy.home.ambassadorSteps" />
+  </div>
+
+  <section class="sd-section sd-section--soft" aria-labelledby="activities-title">
+    <div class="sd-container">
+      <sd-section-header
+        [overline]="copy.ambassadors.title"
+        [title]="copy.ambassadors.activitiesTitle"
+        [lead]="copy.ambassadors.activitiesLead"
+        headingId="activities-title"
+      />
+      @if (activities.error() && activities.items().length === 0) {
+        <sd-error-state [error]="activities.error()" (retry)="activities.reload()" />
+      } @else if (activities.isFirstLoad() && activities.items().length === 0) {
+        <sd-loading-state />
+      } @else if (activities.items().length === 0) {
+        <sd-empty-state icon="school" [title]="copy.ambassadors.empty" />
+      } @else {
+        <ul class="grid" role="list">
+          @for (activity of activities.items(); track activity.slug) {
+            <li><sd-activity-card [activity]="activity" /></li>
+          }
+        </ul>
+        <sd-load-more [hasMore]="activities.hasMore()" [loading]="activities.isLoading()" (more)="activities.loadMore()" />
+      }
+    </div>
+  </section>
+}

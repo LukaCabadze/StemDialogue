@@ -1,0 +1,28 @@
+@let item = partner();
+
+<ng-template #content>
+  <span class="logo">
+    @if (logo(); as src) {
+      <img [src]="src" [alt]="item.name" loading="lazy" decoding="async" />
+    } @else {
+      <span class="logo-text">{{ item.shortName }}</span>
+    }
+  </span>
+  <span class="footer">
+    <span class="domain">{{ domain() || item.shortName }}</span>
+    @if (item.websiteUrl) {
+      <span aria-hidden="true">↗</span>
+    }
+  </span>
+</ng-template>
+
+@if (item.websiteUrl) {
+  <a class="tile" [href]="item.websiteUrl" target="_blank" rel="noopener" [attr.title]="item.name">
+    <ng-container [ngTemplateOutlet]="content" />
+    <span class="sd-sr-only">{{ item.name }} ({{ text().common.newTab }})</span>
+  </a>
+} @else {
+  <div class="tile" [attr.title]="item.name">
+    <ng-container [ngTemplateOutlet]="content" />
+  </div>
+}

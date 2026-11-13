@@ -1,0 +1,28 @@
+@use 'mixins' as *;
+
+.page {
+  padding-bottom: var(--sd-space-88);
+}
+
+.cover {
+  height: 420px;
+  overflow: hidden;
+  border-radius: var(--sd-radius-feature);
+
+  @include mobile {
+    height: 240px;
+  }
+}
+
+.facts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sd-space-16);
+  margin: 0;
+
+  dd {
+    margin: 4px 0 0;
+    font-size: 14px;
+    font-weight: 600;
+  }
+}

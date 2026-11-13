@@ -1,0 +1,129 @@
+@use 'mixins' as *;
+
+:host {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: block;
+  border-bottom: 1px solid var(--sd-border-header);
+  background: rgb(255 255 255 / 96%);
+  backdrop-filter: saturate(1.4) blur(10px);
+}
+
+.bar {
+  display: flex;
+  gap: var(--sd-space-24);
+  align-items: center;
+  justify-content: space-between;
+  width: min(1320px, 100% - 2 * var(--sd-gutter));
+  height: var(--sd-header-height);
+  margin-inline: auto;
+}
+
+.brand {
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: 10px;
+  align-items: center;
+  border-radius: 8px;
+  @include focus-ring;
+}
+
+.symbol {
+  width: 34px;
+  height: 44px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+
+  @include mobile {
+    width: 28px;
+    height: 36px;
+  }
+}
+
+.wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.name {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--sd-blue);
+}
+
+.tagline {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--sd-pink-text);
+}
+
+.actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--sd-space-16);
+  align-items: center;
+}
+
+.menu-button {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius-md);
+  background: var(--sd-page);
+  color: var(--sd-ink);
+  @include focus-ring;
+}
+
+.drawer {
+  display: none;
+}
+
+@media (max-width: 1180px) {
+  .desktop-nav,
+  .join {
+    display: none;
+  }
+
+  .menu-button {
+    display: inline-flex;
+  }
+
+  .drawer {
+    position: fixed;
+    inset: calc(var(--sd-header-height) + 1px) 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sd-space-24);
+    overflow-y: auto;
+    padding: var(--sd-space-8) var(--sd-gutter) var(--sd-space-32);
+    background: var(--sd-page);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition:
+      opacity var(--sd-transition),
+      transform var(--sd-transition),
+      visibility var(--sd-transition);
+
+    &.is-open {
+      visibility: visible;
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@include mobile {
+  .tagline {
+    display: none;
+  }
+
+  .actions {
+    gap: var(--sd-space-8);
+  }
+}

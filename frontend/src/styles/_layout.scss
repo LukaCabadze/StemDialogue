@@ -1,0 +1,51 @@
+@use 'mixins' as *;
+
+.sd-container {
+  width: min(var(--sd-container), 100% - 2 * var(--sd-gutter));
+  margin-inline: auto;
+}
+
+.sd-section {
+  padding-block: var(--sd-section-gap);
+}
+
+.sd-section--soft {
+  background: var(--sd-soft);
+}
+
+.sd-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sd-stack-gap, 18px);
+}
+
+/** Two-column detail layout (764 / 380 at 1200px). */
+.sd-detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 764fr) minmax(0, 380fr);
+  gap: 56px;
+  align-items: start;
+
+  @include tablet-down {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+}
+
+.sd-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sd-space-16);
+}
+
+.sd-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

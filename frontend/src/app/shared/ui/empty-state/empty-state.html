@@ -1,0 +1,16 @@
+<span class="icon-box" aria-hidden="true">
+  <sd-icon [name]="icon()" [size]="20" />
+</span>
+<div class="text">
+  <p class="sd-h4">{{ title() }}</p>
+  @if (text(); as body) {
+    <p class="sd-small">{{ body }}</p>
+  }
+</div>
+<ng-content />
+@if (linkLabel() && linkPath()) {
+  <a class="sd-text-link link" [routerLink]="linkPath()">
+    {{ linkLabel() }}
+    <sd-icon name="arrow-right" />
+  </a>
+}

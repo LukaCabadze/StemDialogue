@@ -1,0 +1,36 @@
+@let copy = text().events;
+@let item = event();
+
+@if (isPast() && archiveFilters().length > 0) {
+  <section class="sd-soft-card">
+    <h2 class="sd-overline">{{ copy.archiveFilters }}</h2>
+    <ul class="sd-pill-row" role="list">
+      @for (filter of archiveFilters(); track $index) {
+        <li>
+          <a [routerLink]="listPath()" [queryParams]="filter.query"><sd-pill>{{ filter.label }}</sd-pill></a>
+        </li>
+      }
+    </ul>
+  </section>
+}
+
+@if (topics().length > 0) {
+  <section class="sd-soft-card">
+    <h2 class="sd-overline">{{ copy.topics }}</h2>
+    <ul class="sd-pill-row" role="list">
+      @for (topic of topics(); track topic.slug) {
+        <li><sd-pill>{{ topic.name }}</sd-pill></li>
+      }
+    </ul>
+  </section>
+}
+
+@if (item.relatedNews[0]; as news) {
+  <section class="sd-soft-card">
+    <h2 class="sd-overline">{{ copy.relatedNews }}</h2>
+    <h3 class="sd-h4 related-title">
+      <a [routerLink]="news.path">{{ news.title }}</a>
+    </h3>
+    <time class="sd-meta" [attr.datetime]="news.publishedAt">{{ news.publishedAt | sdDate: 'long' : language() }}</time>
+  </section>
+}

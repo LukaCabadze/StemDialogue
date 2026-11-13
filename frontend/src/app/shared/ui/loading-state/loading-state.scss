@@ -1,0 +1,87 @@
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+%shimmer {
+  border-radius: var(--sd-radius-card);
+  background: linear-gradient(90deg, var(--sd-soft) 0%, var(--sd-blue-tint) 50%, var(--sd-soft) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--sd-space-24);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sd-space-12);
+}
+
+.detail {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 56px;
+
+  @include tablet-down {
+    grid-template-columns: 1fr;
+  }
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sd-space-16);
+}
+
+.bar {
+  @extend %shimmer;
+  display: block;
+  height: 18px;
+  border-radius: 8px;
+}
+
+.bar--title {
+  width: 80%;
+  height: 44px;
+}
+
+.bar--short {
+  width: 55%;
+}
+
+.block {
+  @extend %shimmer;
+  display: block;
+}
+
+.block--card {
+  height: 360px;
+}
+
+.block--row {
+  height: 84px;
+}
+
+.block--tall {
+  height: 320px;
+}
+
+.block--side {
+  height: 280px;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: -100% 0;
+  }
+}

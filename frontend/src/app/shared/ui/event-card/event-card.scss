@@ -1,0 +1,126 @@
+@use 'mixins' as *;
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sd-space-16);
+  height: 100%;
+  padding: var(--sd-space-24);
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius-card);
+  background: var(--sd-page);
+  transition:
+    border-color var(--sd-transition),
+    box-shadow var(--sd-transition),
+    transform var(--sd-transition);
+
+  &:hover {
+    border-color: var(--sd-border-strong);
+    box-shadow: var(--sd-shadow-card);
+    transform: translateY(-2px);
+  }
+
+  &:focus-within {
+    border-color: var(--sd-blue);
+  }
+}
+
+.top {
+  display: flex;
+  gap: var(--sd-space-16);
+  align-items: flex-start;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.title-link {
+  outline: none;
+
+  // Stretch the title link over the whole card; the footer action sits above it.
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+}
+
+.title {
+  @include line-clamp(3);
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--sd-muted);
+
+  li {
+    display: flex;
+    gap: var(--sd-space-8);
+    align-items: center;
+  }
+
+  sd-icon {
+    color: var(--sd-blue);
+  }
+}
+
+.speaker {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.speaker-name {
+  font-size: 13px;
+  line-height: 18.2px;
+  font-weight: 600;
+}
+
+.speaker-role {
+  font-size: 12px;
+  line-height: 16.8px;
+  color: var(--sd-muted);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sd-space-12);
+  margin-top: auto;
+  padding-top: var(--sd-space-16);
+  border-top: 1px solid var(--sd-border);
+}
+
+.action {
+  position: relative;
+  z-index: 1;
+}
+
+.footer-meta {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--sd-muted);
+}

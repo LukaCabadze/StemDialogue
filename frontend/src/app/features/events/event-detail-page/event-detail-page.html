@@ -1,0 +1,67 @@
+@let copy = text().events;
+
+@if (data(); as item) {
+  <sd-event-detail-header [event]="item" />
+
+  <div class="sd-container body">
+    <div class="sd-detail-grid">
+      <article class="sd-stack main">
+        @if (showNotice()) {
+          <sd-event-status-notice [event]="item" />
+        }
+
+        @if (isCompleted()) {
+          <sd-event-recording
+            [title]="item.title"
+            [recordingUrl]="item.recordingUrl"
+            [embedUrl]="item.recordingEmbedUrl"
+            [cover]="item.cover"
+          />
+          @if (item.recapHtml) {
+            <h2 class="sd-h2-sm">{{ copy.summary }}</h2>
+            <sd-rich-text [html]="item.recapHtml" />
+          }
+          @if (item.gallery.length > 0) {
+            <h3 class="sd-h3 subheading">{{ copy.gallery }}</h3>
+            <sd-gallery-grid [items]="item.gallery" [label]="copy.gallery" />
+          }
+        }
+
+        @if (item.descriptionHtml) {
+          <h2 class="sd-h2-sm" [class.subheading]="isCompleted()">{{ copy.aboutMeeting }}</h2>
+          <sd-rich-text [html]="item.descriptionHtml" />
+        }
+
+        @if (item.participants.length > 0) {
+          <h3 class="sd-h3 subheading">{{ copy.speakers }}</h3>
+          <ul class="speakers" role="list">
+            @for (person of item.participants; track person.slug) {
+              <li><sd-speaker-card [person]="person" /></li>
+            }
+          </ul>
+        }
+
+        <h3 class="sd-h3 subheading">{{ copy.materials }}</h3>
+        @if (item.resources.length > 0) {
+          <ul class="resources" role="list">
+            @for (resource of item.resources; track resource.slug) {
+              <li><sd-resource-item [resource]="resource" /></li>
+            }
+          </ul>
+        } @else {
+          <sd-empty-state icon="file-text" [title]="copy.materialsPendingTitle" [text]="copy.materialsPendingText" />
+        }
+      </article>
+
+      <sd-event-sidebar [event]="item" />
+    </div>
+  </div>
+} @else if (event.error()) {
+  <div class="sd-container sd-section">
+    <sd-error-state [error]="event.error()" (retry)="event.reload()" />
+  </div>
+} @else {
+  <div class="sd-container sd-section">
+    <sd-loading-state layout="detail" />
+  </div>
+}

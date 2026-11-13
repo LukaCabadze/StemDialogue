@@ -1,0 +1,16 @@
+@let copy = text();
+@let item = funding();
+
+<section class="sd-section partners-section" aria-labelledby="home-partners-title">
+  <div class="sd-container">
+    <div class="box">
+      <div class="intro">
+        <p class="sd-overline">{{ index() }} · {{ copy.home.partnersOverline }}</p>
+        <h2 id="home-partners-title" class="sd-h2">{{ copy.home.partnersTitle }}</h2>
+        <p class="sd-body">{{ item.fullText || copy.home.partnersLead }}</p>
+      </div>
+
+      <sd-partner-groups [funding]="item" />
+    </div>
+  </div>
+</section>

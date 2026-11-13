@@ -1,0 +1,35 @@
+@let item = section();
+
+<header class="header">
+  <div>
+    <p class="sd-overline">{{ index() }} · {{ copy().overline }}</p>
+    <h2 class="sd-h2 title">{{ item.title }}</h2>
+    @if (copy().lead) {
+      <p class="sd-body lead">{{ copy().lead }}</p>
+    }
+  </div>
+  @if (item.isOfficialGrantStaff) {
+    <p class="badge">
+      <span class="dot" aria-hidden="true"></span>
+      {{ text().people.officialBadge }} · <span class="sd-digits">{{ text().brand.grantCode }}</span>
+    </p>
+  }
+</header>
+
+@if (asTable()) {
+  <sd-staff-table [members]="item.current" [caption]="item.title" />
+} @else {
+  <ul class="grid" role="list">
+    @for (member of item.current; track member.slug) {
+      <li>
+        <sd-person-card
+          [name]="member.fullName"
+          [photo]="member.photo"
+          [role]="member.roleTitle"
+          [description]="description(member)"
+          [path]="member.path"
+        />
+      </li>
+    }
+  </ul>
+}

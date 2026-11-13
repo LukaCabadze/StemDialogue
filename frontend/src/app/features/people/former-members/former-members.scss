@@ -1,0 +1,14 @@
+:host {
+  display: block;
+}
+
+.toggle {
+  flex-shrink: 0;
+  border: 0;
+  background: none;
+  padding: 0;
+}
+
+.table {
+  margin-top: var(--sd-space-16);
+}

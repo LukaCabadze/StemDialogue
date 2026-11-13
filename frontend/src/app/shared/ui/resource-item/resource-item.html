@@ -1,0 +1,11 @@
+@let item = resource();
+
+<a class="item" [routerLink]="item.path">
+  <span class="icon-box">
+    <sd-icon [name]="icon()" [size]="20" />
+  </span>
+  <span class="text">
+    <span class="title">{{ item.title }}</span>
+    <span class="meta">{{ meta() }}</span>
+  </span>
+</a>

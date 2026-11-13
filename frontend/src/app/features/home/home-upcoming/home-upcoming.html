@@ -1,0 +1,23 @@
+@let copy = text().home;
+
+<section class="sd-section sd-section--soft" aria-labelledby="home-upcoming-title">
+  <div class="sd-container">
+    <sd-section-header
+      [index]="index()"
+      [overline]="copy.upcomingOverline"
+      [title]="copy.upcomingTitle"
+      [linkLabel]="copy.upcomingLink"
+      [linkPath]="listPath()"
+      headingId="home-upcoming-title"
+    />
+    @if (events().length > 0) {
+      <ul class="grid" role="list">
+        @for (event of events(); track event.slug) {
+          <li><sd-event-card [event]="event" /></li>
+        }
+      </ul>
+    } @else {
+      <sd-empty-state icon="calendar" [title]="copy.upcomingEmpty" />
+    }
+  </div>
+</section>

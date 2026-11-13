@@ -1,0 +1,36 @@
+@use 'mixins' as *;
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sd-space-16);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search {
+  flex: 0 1 340px;
+
+  @include mobile {
+    flex-basis: 100%;
+  }
+}
+
+.results {
+  padding-block: var(--sd-space-48) var(--sd-space-88);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sd-space-24);
+  margin: 0;
+
+  @include tablet-down {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}

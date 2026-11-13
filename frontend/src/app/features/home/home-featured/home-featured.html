@@ -1,0 +1,33 @@
+@if (view(); as item) {
+  <section class="sd-container featured-wrap" [attr.aria-label]="item.kindLabel">
+    <article class="featured">
+      <div class="art">
+        <sd-cover-art variant="blue" [image]="item.cover" [label]="item.kindLabel" />
+      </div>
+      <div class="content">
+        <div class="meta">
+          <sd-pill tone="blue">{{ item.categoryLabel }}</sd-pill>
+          <time class="sd-meta" [attr.datetime]="item.date">{{ item.date | sdDate: 'long' : language() }}</time>
+        </div>
+        <h2 class="sd-h2">{{ item.title }}</h2>
+        @if (item.summary) {
+          <p class="sd-body">{{ item.summary }}</p>
+        }
+        <div class="actions">
+          @if (item.registrationUrl) {
+            <sd-action-link [url]="item.registrationUrl" [label]="text().events.register" />
+            <a class="sd-btn sd-btn--secondary" [routerLink]="item.path">
+              {{ text().events.eventPage }}
+              <sd-icon name="arrow-right" />
+            </a>
+          } @else {
+            <a class="sd-btn sd-btn--primary" [routerLink]="item.path">
+              {{ text().home.readMore }}
+              <sd-icon name="arrow-right" />
+            </a>
+          }
+        </div>
+      </div>
+    </article>
+  </section>
+}

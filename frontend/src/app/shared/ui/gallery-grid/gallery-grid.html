@@ -1,0 +1,12 @@
+<ul class="grid" role="list" [attr.aria-label]="label()" [class.single]="visible().length === 1">
+  @for (image of visible(); track image.id; let first = $first; let last = $last) {
+    <li class="tile" [class.tile--large]="first">
+      <a [href]="image.url" target="_blank" rel="noopener">
+        <img [src]="image.url" [alt]="image.alt || image.caption || ''" loading="lazy" decoding="async" />
+        @if (last && hiddenCount() > 0) {
+          <span class="more">+{{ hiddenCount() }}</span>
+        }
+      </a>
+    </li>
+  }
+</ul>

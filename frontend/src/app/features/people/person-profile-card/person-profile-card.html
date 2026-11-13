@@ -1,0 +1,57 @@
+@let copy = text().people;
+@let item = person();
+
+<aside class="card">
+  <div class="portrait">
+    @if (item.photo; as photo) {
+      <img [src]="photo.url" [alt]="photo.alt || item.fullName" />
+    } @else {
+      <sd-avatar [name]="item.fullName" [size]="160" tone="white" />
+    }
+  </div>
+
+  <div class="body">
+    @if (item.roles.length > 0) {
+      <ul class="sd-pill-row" role="list">
+        @for (role of item.roles; track role.role) {
+          <li><sd-pill [tone]="toneOf(role.role)">{{ role.title || role.roleLabel }}</sd-pill></li>
+        }
+      </ul>
+    }
+
+    <div>
+      <h1 class="name">{{ item.fullName }}</h1>
+      @if (title()) {
+        <p class="sd-small">{{ title() }}</p>
+      }
+    </div>
+
+    @if (item.organization) {
+      <dl class="field">
+        <dt>{{ copy.organization }}</dt>
+        <dd>{{ item.organization }}</dd>
+      </dl>
+    }
+    @if (period()) {
+      <dl class="field">
+        <dt>{{ copy.period }}</dt>
+        <dd>{{ period() }}</dd>
+      </dl>
+    }
+
+    @if (item.links.length > 0) {
+      <hr class="sd-divider" />
+      <ul class="links" role="list">
+        @for (link of item.links; track link.url) {
+          <li>
+            <a class="link" [href]="link.url" target="_blank" rel="noopener">
+              <sd-icon [name]="link.type === 'Website' ? 'external-link' : 'link'" [size]="20" />
+              {{ link.label || copy.linkLabels[link.type] }}
+              <span class="sd-sr-only">({{ text().common.newTab }})</span>
+            </a>
+          </li>
+        }
+      </ul>
+    }
+  </div>
+</aside>

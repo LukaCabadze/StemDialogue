@@ -1,0 +1,28 @@
+<sd-page-hero [crumbs]="crumbs()" [title]="title()" [lead]="lead()">
+  <sd-search-box class="search" [placeholder]="text().people.searchPlaceholder" [value]="q() ?? ''" (search)="search($event)" />
+</sd-page-hero>
+
+<section class="sd-container results" [attr.aria-busy]="people.isLoading()">
+  @if (people.error() && people.items().length === 0) {
+    <sd-error-state [error]="people.error()" (retry)="people.reload()" />
+  } @else if (people.isFirstLoad() && people.items().length === 0) {
+    <sd-loading-state [count]="4" />
+  } @else if (people.items().length === 0) {
+    <sd-empty-state icon="users" [title]="q() ? text().common.noResults : text().people.empty" />
+  } @else {
+    <ul class="grid" role="list">
+      @for (person of people.items(); track person.slug) {
+        <li>
+          <sd-person-card
+            [name]="person.fullName"
+            [photo]="person.photo"
+            [role]="person.position"
+            [description]="description(person)"
+            [path]="person.path"
+          />
+        </li>
+      }
+    </ul>
+    <sd-load-more [hasMore]="people.hasMore()" [loading]="people.isLoading()" (more)="people.loadMore()" />
+  }
+</section>

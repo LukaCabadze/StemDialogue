@@ -1,0 +1,27 @@
+# Build output
+bin/
+obj/
+dist/
+out/
+.angular/
+
+# Dependencies
+node_modules/
+
+# IDE
+.vs/
+.vscode/*
+!.vscode/extensions.json
+*.user
+*.suo
+.idea/
+
+# Local data, secrets and logs
+App_Data/
+*.db
+*.db-shm
+*.db-wal
+.env
+appsettings.*.local.json
+TestResults/
+*.log

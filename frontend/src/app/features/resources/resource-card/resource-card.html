@@ -1,0 +1,27 @@
+@let item = resource();
+
+<article class="card">
+  <div class="cover">
+    <sd-cover-art [variant]="variant()" [image]="item.thumbnail" [showPlay]="item.type === 'Video'" [showMark]="item.type !== 'Video'" />
+  </div>
+  <div class="body">
+    <div class="meta">
+      <sd-pill tone="pink">
+        <sd-icon [name]="icon()" [size]="14" />
+        {{ item.typeLabel }}
+      </sd-pill>
+      @if (extension()) {
+        <span class="sd-meta">{{ extension() }}</span>
+      }
+    </div>
+    <a class="title-link" [routerLink]="item.path">
+      <h2 class="sd-h3">{{ item.title }}</h2>
+    </a>
+    @if (item.description) {
+      <p class="sd-small description">{{ item.description }}</p>
+    }
+    @if (source(); as from) {
+      <p class="source">{{ from }}</p>
+    }
+  </div>
+</article>

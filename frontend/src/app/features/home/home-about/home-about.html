@@ -1,0 +1,52 @@
+@let copy = text().home;
+@let teaser = about();
+
+<section class="sd-section" aria-labelledby="home-about-title">
+  <div class="sd-container">
+    <sd-section-header
+      [index]="index()"
+      [overline]="copy.aboutOverline"
+      [title]="teaser.title"
+      [linkLabel]="copy.aboutLink"
+      [linkPath]="teaser.path"
+      headingId="home-about-title"
+    />
+
+    <ul class="cards" role="list">
+      <li class="card">
+        <span class="icon-box"><sd-icon [name]="icons.goal" [size]="20" /></span>
+        <h3 class="sd-h3">{{ copy.goalTitle }}</h3>
+        <p class="sd-body">{{ teaser.lead }}</p>
+      </li>
+      <li class="card">
+        <span class="icon-box"><sd-icon [name]="icons.audience" [size]="20" /></span>
+        <h3 class="sd-h3">{{ copy.audienceTitle }}</h3>
+        <p class="sd-body">{{ copy.audienceText }}</p>
+      </li>
+      <li class="card">
+        <span class="icon-box"><sd-icon [name]="icons.directions" [size]="20" /></span>
+        <h3 class="sd-h3">{{ copy.directionsTitle }}</h3>
+        <ul class="sd-pill-row" role="list">
+          @for (term of disciplines(); track term.slug) {
+            <li><sd-pill>{{ term.name }}</sd-pill></li>
+          } @empty {
+            @for (item of copy.stemLetters; track item.letter) {
+              <li><sd-pill>{{ item.label }}</sd-pill></li>
+            }
+          }
+        </ul>
+      </li>
+    </ul>
+
+    @if (teaser.milestones.length > 0) {
+      <ol class="milestones" role="list">
+        @for (milestone of teaser.milestones; track milestone.id) {
+          <li class="milestone" [class.is-current]="milestone.state === 'Current'" [class.is-done]="milestone.state === 'Done'">
+            <span class="period sd-digits">{{ milestone.periodLabel }}</span>
+            <span class="sd-h4">{{ milestone.title }}</span>
+          </li>
+        }
+      </ol>
+    }
+  </div>
+</section>

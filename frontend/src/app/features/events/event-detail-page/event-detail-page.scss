@@ -1,0 +1,25 @@
+@use 'mixins' as *;
+
+.body {
+  padding-block: 56px var(--sd-space-88);
+}
+
+.subheading {
+  padding-top: var(--sd-space-12);
+}
+
+.speakers,
+.resources {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sd-space-24);
+  margin: 0;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.resources {
+  gap: var(--sd-space-16);
+}

@@ -1,0 +1,18 @@
+<nav [attr.aria-label]="text().common.breadcrumb">
+  <ol role="list">
+    @for (crumb of items(); track $index; let last = $last) {
+      <li>
+        @if (last) {
+          <span class="current" aria-current="page">{{ crumb.label }}</span>
+        } @else {
+          @if (crumb.path) {
+            <a [routerLink]="crumb.path">{{ crumb.label }}</a>
+          } @else {
+            <span>{{ crumb.label }}</span>
+          }
+          <span class="separator" aria-hidden="true">/</span>
+        }
+      </li>
+    }
+  </ol>
+</nav>

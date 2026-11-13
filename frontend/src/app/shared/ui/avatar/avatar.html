@@ -1,0 +1,6 @@
+@if (photo(); as image) {
+  <img [src]="image.url" [alt]="image.alt || name()" loading="lazy" decoding="async" />
+} @else {
+  <span class="initials" [style.font-size.px]="fontSize()" aria-hidden="true">{{ initials() }}</span>
+  <span class="sd-sr-only">{{ name() }}</span>
+}

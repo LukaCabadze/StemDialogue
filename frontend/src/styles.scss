@@ -1,0 +1,9 @@
+// Global stylesheet: tokens, reset and the small set of utility classes shared across features.
+// Component-specific styles live next to each component.
+@use 'tokens';
+@use 'base';
+@use 'typography';
+@use 'layout';
+@use 'buttons';
+@use 'cards';
+@use 'prose';

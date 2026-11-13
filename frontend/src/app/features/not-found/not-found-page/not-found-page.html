@@ -1,0 +1,14 @@
+@let copy = text().common;
+
+<section class="sd-container page">
+  <p class="code sd-digits" aria-hidden="true">404</p>
+  <h1 class="sd-h1">{{ copy.notFoundTitle }}</h1>
+  <p class="sd-lead">{{ copy.notFoundText }}</p>
+  <div class="actions">
+    <a class="sd-btn sd-btn--primary" [routerLink]="project.rootPath()">
+      {{ copy.backHome }}
+      <sd-icon name="arrow-right" />
+    </a>
+    <a class="sd-btn sd-btn--secondary" [routerLink]="project.path('stem-saturdays')">{{ text().nav.stemSaturdays }}</a>
+  </div>
+</section>

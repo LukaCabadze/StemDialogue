@@ -1,0 +1,11 @@
+.band {
+  padding-bottom: var(--sd-space-48);
+  border-bottom: 1px solid var(--sd-border);
+  background: linear-gradient(180deg, var(--sd-soft) 0%, var(--sd-page) 100%);
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}

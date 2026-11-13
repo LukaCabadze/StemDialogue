@@ -1,0 +1,76 @@
+@use 'mixins' as *;
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sd-space-24);
+  margin: 0;
+
+  @include tablet-down {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sd-space-12);
+  padding: 28px;
+  border-radius: var(--sd-radius-card);
+  background: var(--sd-soft);
+}
+
+.icon-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: var(--sd-space-4);
+  border-radius: var(--sd-radius-md);
+  background: var(--sd-page);
+  color: var(--sd-blue);
+}
+
+.milestones {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: var(--sd-space-24) 0 0;
+  overflow: hidden;
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius-card);
+
+  @include tablet-down {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.milestone {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px var(--sd-space-24);
+
+  & + & {
+    border-left: 1px solid var(--sd-border);
+
+    @include mobile {
+      border-left: 0;
+      border-top: 1px solid var(--sd-border);
+    }
+  }
+
+  &.is-current {
+    background: var(--sd-blue-tint);
+  }
+}
+
+.period {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--sd-pink-text);
+}

@@ -1,0 +1,89 @@
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+.item {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  height: 100%;
+  padding: var(--sd-space-16) 18px;
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius-chip);
+  background: var(--sd-page);
+  transition:
+    border-color var(--sd-transition),
+    background-color var(--sd-transition);
+  @include focus-ring;
+
+  &:hover {
+    border-color: var(--sd-border-strong);
+  }
+}
+
+.icon-box {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--sd-radius-md);
+  background: var(--sd-pink-tint);
+  color: var(--sd-pink-text);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--sd-ink);
+  @include line-clamp(2);
+}
+
+.meta {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  color: var(--sd-muted);
+}
+
+:host(.tone-dark) {
+  .item {
+    padding: 14px 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+
+    &:hover .title {
+      color: var(--sd-night-overline);
+    }
+  }
+
+  .icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--sd-radius-md);
+    background: var(--sd-night);
+    color: var(--sd-pink);
+  }
+
+  .title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--sd-on-brand);
+    transition: color var(--sd-transition);
+  }
+
+  .meta {
+    color: var(--sd-night-muted);
+  }
+}

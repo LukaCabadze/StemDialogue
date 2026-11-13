@@ -1,0 +1,47 @@
+@use 'mixins' as *;
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sd-space-16);
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 180px)) minmax(220px, 1fr);
+  gap: var(--sd-space-12);
+
+  @include tablet-down {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    .search {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.select select {
+  width: 100%;
+  height: 44px;
+  padding: 0 36px 0 14px;
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius-md);
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23596779' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E")
+      no-repeat right 12px center,
+    var(--sd-page);
+  font-size: 14px;
+  color: var(--sd-ink);
+  appearance: none;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    border-color: var(--sd-blue);
+    box-shadow: var(--sd-focus-ring);
+  }
+}

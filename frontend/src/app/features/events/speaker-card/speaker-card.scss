@@ -1,0 +1,35 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.card {
+  display: flex;
+  gap: var(--sd-space-16);
+  align-items: center;
+  height: 100%;
+  padding: 20px;
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius-card);
+  background: var(--sd-page);
+}
+
+.text {
+  min-width: 0;
+}
+
+.role {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--sd-pink-text);
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.link {
+  margin-top: 6px;
+}

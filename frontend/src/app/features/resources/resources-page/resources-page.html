@@ -1,0 +1,25 @@
+@let copy = text().resources;
+
+<sd-page-hero [crumbs]="crumbs()" [title]="copy.title" [lead]="copy.lead">
+  <div class="filters">
+    <sd-filter-chips [options]="typeOptions()" [value]="selectedType() ?? 'all'" (valueChange)="selectType($event)" [label]="copy.title" />
+    <sd-search-box class="search" [placeholder]="copy.searchPlaceholder" [value]="q() ?? ''" (search)="search($event)" />
+  </div>
+</sd-page-hero>
+
+<section class="sd-container results" [attr.aria-busy]="resources.isLoading()">
+  @if (resources.error() && resources.items().length === 0) {
+    <sd-error-state [error]="resources.error()" (retry)="resources.reload()" />
+  } @else if (resources.isFirstLoad() && resources.items().length === 0) {
+    <sd-loading-state />
+  } @else if (resources.items().length === 0) {
+    <sd-empty-state icon="archive" [title]="q() ? text().common.noResults : copy.empty" />
+  } @else {
+    <ul class="grid" role="list">
+      @for (resource of resources.items(); track resource.slug) {
+        <li><sd-resource-card [resource]="resource" /></li>
+      }
+    </ul>
+    <sd-load-more [hasMore]="resources.hasMore()" [loading]="resources.isLoading()" (more)="resources.loadMore()" />
+  }
+</section>

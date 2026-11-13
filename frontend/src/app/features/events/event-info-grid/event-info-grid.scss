@@ -1,0 +1,68 @@
+@use 'mixins' as *;
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius-lg);
+  background: var(--sd-page);
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cell {
+  display: flex;
+  gap: var(--sd-space-12);
+  align-items: center;
+  padding: 18px 20px;
+  border-color: var(--sd-border);
+  border-style: solid;
+  border-width: 0;
+
+  &:nth-child(odd) {
+    border-right-width: 1px;
+  }
+
+  &:nth-child(-n + 2) {
+    border-bottom-width: 1px;
+  }
+
+  @include mobile {
+    border-right-width: 0 !important;
+    border-bottom-width: 1px;
+
+    &:last-child {
+      border-bottom-width: 0;
+    }
+  }
+}
+
+.icon-box {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--sd-radius-sm);
+  background: var(--sd-blue-tint);
+  color: var(--sd-blue);
+}
+
+dt {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--sd-muted);
+}
+
+dd {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--sd-ink);
+}

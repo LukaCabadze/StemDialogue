@@ -1,0 +1,27 @@
+@if (image(); as media) {
+  <img class="photo" [src]="media.url" [alt]="alt() || media.alt || ''" loading="lazy" decoding="async" />
+} @else {
+  <div class="art" aria-hidden="true">
+    <span class="ring ring--one"></span>
+    <span class="ring ring--two"></span>
+    <span class="dot dot--large"></span>
+    <span class="dot dot--small"></span>
+    @if (showMark()) {
+      @if (variant() === 'light') {
+        <img class="mark mark--symbol" src="brand/symbol.png" alt="" />
+      } @else {
+        <sd-icon class="mark mark--atom" name="atom" [size]="36" [strokeWidth]="1.6" />
+      }
+    }
+  </div>
+}
+
+@if (showPlay()) {
+  <span class="play" aria-hidden="true">
+    <sd-icon name="play" [size]="20" />
+  </span>
+}
+
+@if (label(); as text) {
+  <span class="label">{{ text }}</span>
+}

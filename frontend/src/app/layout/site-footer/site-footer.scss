@@ -1,0 +1,159 @@
+@use 'mixins' as *;
+
+:host {
+  display: block;
+  margin-top: auto;
+  border-top: 1px solid var(--sd-border);
+  background: var(--sd-page);
+}
+
+.funding {
+  padding-block: 28px;
+  border-bottom: 1px solid var(--sd-border);
+  background: var(--sd-soft);
+}
+
+.funding-inner {
+  display: flex;
+  gap: var(--sd-space-32);
+  align-items: center;
+  justify-content: space-between;
+
+  @include tablet-down {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.funding-text {
+  max-width: 440px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--sd-ink);
+}
+
+.logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sd-space-12);
+  margin: 0;
+
+  @include mobile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: 328fr 234fr 234fr 281fr;
+  gap: 40px;
+  padding-block: 56px;
+
+  @include tablet-down {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-block: 40px;
+  }
+}
+
+.brand {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+
+  img {
+    width: 34px;
+    height: 44px;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+}
+
+.wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.name {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--sd-blue);
+}
+
+.tagline {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--sd-pink-text);
+}
+
+.description {
+  max-width: 300px;
+  margin-top: var(--sd-space-16);
+}
+
+.grant {
+  margin-top: var(--sd-space-12);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--sd-blue);
+}
+
+.heading {
+  margin-bottom: var(--sd-space-16);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.66px;
+  text-transform: uppercase;
+  color: var(--sd-blue);
+}
+
+.column ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--sd-muted);
+}
+
+.column a {
+  transition: color var(--sd-transition);
+
+  &:hover {
+    color: var(--sd-blue);
+  }
+}
+
+.contact li:first-child {
+  font-weight: 600;
+  color: var(--sd-ink);
+}
+
+.social {
+  font-weight: 600;
+  color: var(--sd-blue);
+}
+
+.bottom {
+  border-top: 1px solid var(--sd-border);
+}
+
+.bottom-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sd-space-8) var(--sd-space-24);
+  justify-content: space-between;
+  padding-block: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--sd-muted);
+}

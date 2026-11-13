@@ -1,0 +1,38 @@
+:host {
+  display: block;
+  padding-block: var(--sd-space-24);
+}
+
+ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sd-space-8);
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--sd-muted);
+}
+
+li {
+  display: inline-flex;
+  gap: var(--sd-space-8);
+  min-width: 0;
+}
+
+a {
+  transition: color var(--sd-transition);
+
+  &:hover {
+    color: var(--sd-blue);
+  }
+}
+
+.current {
+  overflow: hidden;
+  max-width: 48ch;
+  font-weight: 600;
+  color: var(--sd-ink);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

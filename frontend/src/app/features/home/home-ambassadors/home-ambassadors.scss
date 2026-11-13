@@ -1,0 +1,24 @@
+@use 'mixins' as *;
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 56px;
+  align-items: center;
+
+  @include tablet-down {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sd-space-16);
+
+  .sd-btn {
+    margin-top: var(--sd-space-8);
+  }
+}

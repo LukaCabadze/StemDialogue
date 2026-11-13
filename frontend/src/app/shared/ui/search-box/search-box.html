@@ -1,0 +1,12 @@
+<form role="search" (submit)="onSubmit(field.value, $event)">
+  <sd-icon class="icon" name="search" [size]="18" />
+  <input
+    #field
+    type="search"
+    [value]="value()"
+    [placeholder]="placeholder()"
+    [attr.aria-label]="placeholder()"
+    autocomplete="off"
+    (input)="onInput(field.value)"
+  />
+</form>

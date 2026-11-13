@@ -1,0 +1,22 @@
+@let item = event();
+
+<header class="band">
+  <div class="sd-container">
+    <sd-breadcrumbs [items]="crumbs()" />
+    <div class="sd-detail-grid">
+      <div class="intro">
+        <div class="sd-pill-row">
+          <sd-status-pill [status]="item.status" [label]="item.statusLabel" />
+          <sd-pill tone="pink">{{ item.typeLabel }}</sd-pill>
+          <sd-pill>{{ item.formatLabel }}</sd-pill>
+        </div>
+        <h1 class="sd-h1">{{ item.title }}</h1>
+        @if (item.summary) {
+          <p class="sd-lead">{{ item.summary }}</p>
+        }
+        <sd-event-info-grid [event]="item" />
+      </div>
+      <sd-event-registration-card [event]="item" />
+    </div>
+  </div>
+</header>

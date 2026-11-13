@@ -1,0 +1,16 @@
+.related-title {
+  padding-top: 10px;
+
+  a:hover {
+    color: var(--sd-blue);
+  }
+}
+
+.sd-pill-row a sd-pill {
+  transition: border-color var(--sd-transition);
+}
+
+.sd-pill-row a:hover sd-pill {
+  border-color: var(--sd-blue);
+  color: var(--sd-blue);
+}

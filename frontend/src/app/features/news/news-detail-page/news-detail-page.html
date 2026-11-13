@@ -1,0 +1,36 @@
+@if (data(); as item) {
+  <div class="sd-container">
+    <sd-breadcrumbs [items]="crumbs()" />
+    <div class="sd-detail-grid page">
+      <sd-news-article [article]="item" />
+      <sd-news-sidebar [article]="item" [categories]="categoryList()" />
+    </div>
+  </div>
+
+  @if (item.related.length > 0) {
+    <section class="sd-section sd-section--soft" aria-labelledby="related-news-title">
+      <div class="sd-container">
+        <sd-section-header
+          [overline]="text().news.title"
+          [title]="text().news.related"
+          [linkLabel]="text().home.newsLink"
+          [linkPath]="project.path('news')"
+          headingId="related-news-title"
+        />
+        <ul class="related" role="list">
+          @for (news of item.related; track news.slug) {
+            <li><sd-news-card [news]="news" /></li>
+          }
+        </ul>
+      </div>
+    </section>
+  }
+} @else if (article.error()) {
+  <div class="sd-container sd-section">
+    <sd-error-state [error]="article.error()" (retry)="article.reload()" />
+  </div>
+} @else {
+  <div class="sd-container sd-section">
+    <sd-loading-state layout="detail" />
+  </div>
+}

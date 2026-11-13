@@ -1,0 +1,48 @@
+@if (data(); as item) {
+  <sd-page-hero [crumbs]="crumbs()" [title]="item.page.title" [lead]="item.page.lead">
+    @if (item.page.primaryAction || item.page.secondaryAction) {
+      <div class="actions">
+        @if (item.page.primaryAction; as action) {
+          <sd-action-link [url]="action.url" [label]="action.label" />
+        }
+        @if (item.page.secondaryAction; as action) {
+          <sd-action-link [url]="action.url" [label]="action.label" variant="secondary" />
+        }
+      </div>
+    }
+  </sd-page-hero>
+
+  <div class="sd-container body">
+    <div class="sd-detail-grid">
+      <div class="sd-stack">
+        @if (item.page.bodyHtml) {
+          <sd-rich-text [html]="item.page.bodyHtml" />
+        }
+      </div>
+      @if (item.milestones.length > 0) {
+        <aside class="timeline-column" [attr.aria-label]="text().home.aboutOverline">
+          <sd-milestone-timeline [milestones]="item.milestones" />
+        </aside>
+      }
+    </div>
+  </div>
+
+  <section id="funding" class="sd-section sd-section--soft" aria-labelledby="funding-title">
+    <div class="sd-container funding">
+      <div class="funding-text">
+        <p class="sd-overline">{{ text().home.partnersOverline }}</p>
+        <h2 id="funding-title" class="sd-h2">{{ text().home.partnersTitle }}</h2>
+        <p class="sd-body">{{ item.funding.fullText }}</p>
+      </div>
+      <sd-partner-groups [funding]="item.funding" />
+    </div>
+  </section>
+} @else if (about.error()) {
+  <div class="sd-container sd-section">
+    <sd-error-state [error]="about.error()" (retry)="about.reload()" />
+  </div>
+} @else {
+  <div class="sd-container sd-section">
+    <sd-loading-state layout="detail" />
+  </div>
+}

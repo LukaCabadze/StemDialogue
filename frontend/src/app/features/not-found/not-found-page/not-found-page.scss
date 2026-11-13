@@ -1,0 +1,26 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sd-space-16);
+  padding-block: 120px;
+  text-align: center;
+}
+
+.code {
+  font-size: 96px;
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--sd-blue) 0%, var(--sd-pink) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sd-space-12);
+  justify-content: center;
+  margin-top: var(--sd-space-8);
+}

@@ -1,0 +1,10 @@
+<div class="sd-container">
+  <sd-breadcrumbs [items]="crumbs()" />
+  <h1 class="sd-h1">{{ title() }}</h1>
+  @if (lead(); as leadText) {
+    <p class="sd-lead lead">{{ leadText }}</p>
+  }
+  <div class="extra">
+    <ng-content />
+  </div>
+</div>

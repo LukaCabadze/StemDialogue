@@ -1,0 +1,4 @@
+<time [attr.datetime]="date()">
+  <span class="day">{{ date() | sdDate: 'day' : language() }}</span>
+  <span class="month">{{ date() | sdDate: 'monthShort' : language() }}</span>
+</time>

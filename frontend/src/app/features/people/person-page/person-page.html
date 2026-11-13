@@ -1,0 +1,55 @@
+@let copy = text().people;
+
+@if (data(); as item) {
+  <div class="sd-container">
+    <sd-breadcrumbs [items]="crumbs()" />
+    <div class="layout">
+      <sd-person-profile-card [person]="item" />
+
+      <div class="sd-stack main">
+        @if (item.shortBio || item.biographyHtml) {
+          <h2 class="sd-h2-sm">{{ copy.biography }}</h2>
+          @if (item.shortBio) {
+            <p class="sd-lead">{{ item.shortBio }}</p>
+          }
+          @if (item.biographyHtml) {
+            <sd-rich-text [html]="item.biographyHtml" />
+          }
+        }
+
+        @if (item.contribution) {
+          <h2 class="sd-h2-sm subheading">{{ copy.contribution }}</h2>
+          <sd-person-contribution [text]="item.contribution" />
+        }
+
+        @if (events().length > 0) {
+          <h2 class="sd-h2-sm subheading">{{ copy.events }}</h2>
+          <ul class="events" role="list">
+            @for (event of events(); track event.slug) {
+              <li>
+                <sd-event-row [event]="event" [linkLabel]="event.isUpcoming ? copy.details : copy.archive" />
+              </li>
+            }
+          </ul>
+        }
+
+        @if (item.resources.length > 0) {
+          <h2 class="sd-h2-sm subheading">{{ copy.materials }}</h2>
+          <ul class="resources" role="list">
+            @for (resource of item.resources; track resource.slug) {
+              <li><sd-resource-item [resource]="resource" /></li>
+            }
+          </ul>
+        }
+      </div>
+    </div>
+  </div>
+} @else if (person.error()) {
+  <div class="sd-container sd-section">
+    <sd-error-state [error]="person.error()" (retry)="person.reload()" />
+  </div>
+} @else {
+  <div class="sd-container sd-section">
+    <sd-loading-state layout="detail" />
+  </div>
+}

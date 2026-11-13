@@ -1,0 +1,128 @@
+:host {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  isolation: isolate;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.art {
+  position: absolute;
+  inset: 0;
+}
+
+:host(.cover--blue) .art {
+  background: linear-gradient(151deg, var(--sd-blue) 0%, var(--sd-blue-deep) 55%, var(--sd-violet) 100%);
+}
+
+:host(.cover--pink) .art {
+  background: linear-gradient(141deg, var(--sd-pink) 0%, #b8246a 60%, #5b2c8f 100%);
+}
+
+:host(.cover--light) .art {
+  background: linear-gradient(140deg, var(--sd-blue-tint) 0%, var(--sd-pink-tint) 100%);
+}
+
+.ring {
+  position: absolute;
+  border: 2px solid rgb(255 255 255 / 28%);
+  border-radius: 50%;
+}
+
+:host(.cover--light) .ring {
+  border-color: rgb(8 69 181 / 18%);
+}
+
+.ring--one {
+  left: 38%;
+  top: -40%;
+  width: 70%;
+  height: 120%;
+  transform: rotate(-25deg);
+}
+
+.ring--two {
+  left: -14%;
+  top: 40%;
+  width: 92%;
+  height: 72%;
+  transform: rotate(15deg);
+}
+
+.dot {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--sd-pink);
+}
+
+:host(.cover--pink) .dot {
+  background: var(--sd-page);
+}
+
+.dot--large {
+  left: 62%;
+  top: 18%;
+  width: 14px;
+  height: 14px;
+}
+
+.dot--small {
+  left: 18%;
+  top: 70%;
+  width: 9px;
+  height: 9px;
+}
+
+.mark {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+}
+
+.mark--atom {
+  color: var(--sd-page);
+}
+
+.mark--symbol {
+  width: 36px;
+  height: auto;
+  opacity: 0.9;
+  mix-blend-mode: multiply;
+}
+
+.play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--sd-page);
+  color: var(--sd-blue);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 12px 30px -12px rgb(14 34 68 / 45%);
+}
+
+.label {
+  position: absolute;
+  left: 20px;
+  bottom: 18px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.66px;
+  color: rgb(255 255 255 / 85%);
+}
+
+:host(.cover--light) .label {
+  color: var(--sd-blue);
+}

@@ -1,0 +1,29 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  outline: none;
+}
+
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 10px 16px;
+  border-radius: var(--sd-radius-sm);
+  background: var(--sd-blue);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--sd-on-brand);
+  transform: translateY(-160%);
+  transition: transform var(--sd-transition);
+
+  &:focus {
+    transform: none;
+  }
+}

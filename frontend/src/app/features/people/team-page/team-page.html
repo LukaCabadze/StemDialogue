@@ -1,0 +1,28 @@
+@let copy = text().people;
+
+<sd-page-hero [crumbs]="crumbs()" [title]="title()" [lead]="lead()">
+  @if (sections().length > 1) {
+    <nav class="tabs" [attr.aria-label]="title()">
+      @for (section of sections(); track section.role; let first = $first) {
+        <a class="tab" [class.is-active]="first" [routerLink]="[]" [fragment]="anchorOf(section)">
+          {{ copy.sections[section.role].tab }}
+        </a>
+      }
+    </nav>
+  }
+</sd-page-hero>
+
+<div class="sd-container body">
+  @if (data()) {
+    @for (section of sections(); track section.role; let position = $index) {
+      <sd-team-section [section]="section" [index]="indexOf(position)" />
+    }
+    @if (former().length > 0) {
+      <sd-former-members [members]="former()" />
+    }
+  } @else if (team.error()) {
+    <sd-error-state [error]="team.error()" (retry)="team.reload()" />
+  } @else {
+    <sd-loading-state [count]="4" />
+  }
+</div>

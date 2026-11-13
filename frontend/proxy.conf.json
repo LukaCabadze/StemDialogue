@@ -1,0 +1,5 @@
+{
+  "/api": { "target": "http://localhost:5080", "secure": false, "changeOrigin": true },
+  "/media": { "target": "http://localhost:5080", "secure": false, "changeOrigin": true },
+  "/sitemap.xml": { "target": "http://localhost:5080", "secure": false, "changeOrigin": true }
+}

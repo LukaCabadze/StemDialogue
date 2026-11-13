@@ -1,0 +1,13 @@
+<ol class="stepper" role="list">
+  @for (step of steps(); track step; let index = $index) {
+    <li
+      class="step"
+      [class.is-done]="index < current()"
+      [class.is-current]="index === current()"
+      [attr.aria-current]="index === current() ? 'step' : null"
+    >
+      <span class="marker" aria-hidden="true"></span>
+      <span class="label">{{ step }}</span>
+    </li>
+  }
+</ol>

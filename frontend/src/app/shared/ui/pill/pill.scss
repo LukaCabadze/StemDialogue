@@ -1,0 +1,44 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding-inline: var(--sd-space-12);
+  border: 1px solid transparent;
+  border-radius: var(--sd-radius-pill);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+:host(.sd-pill--outline) {
+  background: var(--sd-page);
+  border-color: var(--sd-border);
+  color: var(--sd-ink);
+}
+
+:host(.sd-pill--blue) {
+  background: var(--sd-blue-tint);
+  color: var(--sd-blue);
+  font-weight: 600;
+}
+
+:host(.sd-pill--pink) {
+  background: var(--sd-pink-tint);
+  color: var(--sd-pink-text);
+  font-weight: 600;
+}
+
+:host(.sd-pill--dark) {
+  background: var(--sd-night-card);
+  border-color: var(--sd-night-border);
+  color: var(--sd-on-brand);
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}

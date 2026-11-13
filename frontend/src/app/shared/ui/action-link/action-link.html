@@ -1,0 +1,12 @@
+@if (external()) {
+  <a [class]="classes()" [href]="url()" target="_blank" rel="noopener">
+    {{ label() }}
+    <sd-icon name="arrow-up-right" />
+    <span class="sd-sr-only">({{ text().common.newTab }})</span>
+  </a>
+} @else {
+  <a [class]="classes()" [routerLink]="url()">
+    {{ label() }}
+    <sd-icon name="arrow-right" />
+  </a>
+}

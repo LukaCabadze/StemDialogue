@@ -1,0 +1,59 @@
+@let copy = text().ambassadors;
+
+@if (data(); as detail) {
+  @let item = detail.activity;
+  <div class="sd-container">
+    <sd-breadcrumbs [items]="crumbs()" />
+    <div class="sd-detail-grid page">
+      <article class="sd-stack">
+        <h1 class="sd-h1">{{ item.title }}</h1>
+        @if (item.summary) {
+          <p class="sd-lead">{{ item.summary }}</p>
+        }
+        <div class="cover">
+          <sd-cover-art [variant]="variant()" [image]="item.cover" />
+        </div>
+        @if (detail.bodyHtml) {
+          <sd-rich-text [html]="detail.bodyHtml" />
+        }
+        @if (detail.gallery.length > 0) {
+          <sd-gallery-grid [items]="detail.gallery" [label]="text().events.gallery" />
+        }
+      </article>
+
+      <aside class="sd-sidebar">
+        <dl class="sd-soft-card facts">
+          @if (item.schoolName) {
+            <div>
+              <dt class="sd-overline">{{ copy.school }}</dt>
+              <dd>{{ item.schoolName }}</dd>
+            </div>
+          }
+          @if (item.region) {
+            <div>
+              <dt class="sd-overline">{{ copy.region }}</dt>
+              <dd>{{ item.region }}</dd>
+            </div>
+          }
+          @if (item.activityDate) {
+            <div>
+              <dt class="sd-overline">{{ text().events.date }}</dt>
+              <dd>{{ item.activityDate | sdDate: 'long' : language() }}</dd>
+            </div>
+          }
+        </dl>
+        <div class="sd-soft-card">
+          <sd-share-buttons [path]="item.path" [showLabel]="true" />
+        </div>
+      </aside>
+    </div>
+  </div>
+} @else if (detail.error()) {
+  <div class="sd-container sd-section">
+    <sd-error-state [error]="detail.error()" (retry)="detail.reload()" />
+  </div>
+} @else {
+  <div class="sd-container sd-section">
+    <sd-loading-state layout="detail" />
+  </div>
+}

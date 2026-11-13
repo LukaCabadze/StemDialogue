@@ -1,0 +1,32 @@
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+.player,
+.poster {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--sd-radius-feature);
+  background: var(--sd-night);
+}
+
+.player {
+  aspect-ratio: 16 / 9;
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+}
+
+.poster {
+  height: 420px;
+  @include focus-ring;
+
+  @include mobile {
+    height: 240px;
+  }
+}

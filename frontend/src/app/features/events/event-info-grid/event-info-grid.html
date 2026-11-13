@@ -1,0 +1,11 @@
+<dl class="grid">
+  @for (cell of cells(); track cell.label) {
+    <div class="cell">
+      <span class="icon-box" aria-hidden="true"><sd-icon [name]="cell.icon" [size]="18" /></span>
+      <div>
+        <dt>{{ cell.label }}</dt>
+        <dd>{{ cell.value }}</dd>
+      </div>
+    </div>
+  }
+</dl>

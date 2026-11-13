@@ -1,0 +1,59 @@
+@let copy = text().home;
+
+<section class="hero" aria-labelledby="home-hero-title">
+  <div class="sd-container grid">
+    <div class="intro">
+      <p class="pill">
+        <span class="pill-dot" aria-hidden="true"></span>
+        {{ copy.heroPill }} <span class="sd-digits">{{ projectYears() }}</span>
+      </p>
+      <h1 id="home-hero-title" class="sd-display title">{{ title() }}</h1>
+      <p class="subtitle">{{ subtitle() }}</p>
+      @if (hero()?.lead; as lead) {
+        <p class="sd-lead lead">{{ lead }}</p>
+      }
+      <div class="actions">
+        <sd-action-link [url]="primary().url" [label]="primary().label" />
+        <sd-action-link [url]="secondary().url" [label]="secondary().label" variant="secondary" />
+      </div>
+    </div>
+
+    <div class="visual" aria-hidden="true">
+      <span class="ring ring--dashed"></span>
+      <span class="ring ring--pink"></span>
+      <span class="orb">
+        <img src="brand/symbol.png" alt="" width="170" height="217" />
+      </span>
+    </div>
+
+    @if (nextEvent(); as event) {
+      <a class="next-card" [routerLink]="event.path">
+        <sd-date-chip [date]="event.startsAt" size="md" />
+        <span class="next-text">
+          <span class="next-label">{{ copy.nextMeeting }} · {{ nextEventTime() }}</span>
+          <span class="next-title">{{ event.title }}</span>
+        </span>
+      </a>
+      @if (registrationOpen()) {
+        <p class="registration-badge">
+          <span class="badge-dot" aria-hidden="true"></span>
+          {{ copy.registrationOpen }}
+        </p>
+      }
+    }
+  </div>
+
+  <div class="sd-container">
+    <ul class="letters" role="list">
+      @for (item of copy.stemLetters; track item.letter; let last = $last) {
+        <li>
+          <span class="letter">{{ item.letter }}</span>
+          <span class="letter-label">{{ item.label }}</span>
+        </li>
+        @if (!last) {
+          <li class="sparkle" aria-hidden="true">✦</li>
+        }
+      }
+    </ul>
+  </div>
+</section>

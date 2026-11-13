@@ -1,0 +1,19 @@
+@let item = person();
+
+<article class="card">
+  <sd-avatar [name]="item.fullName" [photo]="item.photo" [size]="72" />
+  <div class="text">
+    @if (item.role) {
+      <p class="role">{{ item.role }}</p>
+    }
+    <h3 class="name">{{ item.fullName }}</h3>
+    @if (affiliation()) {
+      <p class="sd-small">{{ affiliation() }}</p>
+    }
+    <a class="sd-text-link sd-text-link--sm link" [routerLink]="item.path">
+      {{ text().events.profile }}
+      <sd-icon name="arrow-right" />
+      <span class="sd-sr-only">: {{ item.fullName }}</span>
+    </a>
+  </div>
+</article>

@@ -1,0 +1,52 @@
+@use 'mixins' as *;
+
+.featured-wrap {
+  padding-bottom: var(--sd-section-gap);
+}
+
+.featured {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius-xl);
+  background: var(--sd-page);
+
+  @include tablet-down {
+    grid-template-columns: 1fr;
+  }
+}
+
+.art {
+  min-height: 360px;
+
+  @include mobile {
+    min-height: 220px;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--sd-space-16);
+  padding: var(--sd-space-48);
+
+  @include mobile {
+    padding: var(--sd-space-24);
+  }
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sd-space-12);
+  margin-top: var(--sd-space-8);
+}

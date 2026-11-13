@@ -1,0 +1,12 @@
+@let item = event();
+
+<sd-date-chip [date]="item.startsAt" />
+<div class="text">
+  <sd-status-pill [status]="item.status" [label]="item.statusLabel" />
+  <h3 class="sd-h4 title">{{ item.title }}</h3>
+</div>
+<a class="sd-text-link link" [routerLink]="item.path">
+  {{ linkLabel() }}
+  <sd-icon name="arrow-right" />
+  <span class="sd-sr-only">: {{ item.title }}</span>
+</a>

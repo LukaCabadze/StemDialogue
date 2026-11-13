@@ -1,0 +1,89 @@
+// Design tokens from Figma "01 Foundations". Exposed as CSS custom properties so every
+// component stylesheet can use them without importing Sass.
+:root {
+  // Brand
+  --sd-blue: #0845b5;
+  --sd-blue-deep: #073a97;
+  --sd-pink: #ec367e;
+  --sd-pink-text: #c21e63;
+  --sd-violet: #3b2c8f;
+
+  // Text
+  --sd-ink: #142b4b;
+  --sd-muted: #596779;
+  --sd-nav: #3e4f68;
+  --sd-on-brand: #ffffff;
+
+  // Surfaces
+  --sd-page: #ffffff;
+  --sd-soft: #f6f8fc;
+  --sd-blue-tint: #eef4fe;
+  --sd-pink-tint: #fff0f6;
+  --sd-night: #0e2244;
+  --sd-night-card: #16305a;
+  --sd-night-border: #23406f;
+  --sd-night-muted: #b8c4da;
+  --sd-night-overline: #f59ac0;
+
+  // Borders
+  --sd-border: #dfe6ef;
+  --sd-border-strong: #b9c9e6;
+  --sd-border-header: #e9eef5;
+
+  // Event status
+  --sd-status-planned: #0845b5;
+  --sd-status-planned-bg: #eef4fe;
+  --sd-status-completed: #1f7a4d;
+  --sd-status-completed-bg: #e8f5ee;
+  --sd-status-cancelled: #b42318;
+  --sd-status-cancelled-bg: #fdf3f2;
+  --sd-status-cancelled-border: #e8c2c0;
+  --sd-status-postponed: #9a5b00;
+  --sd-status-postponed-bg: #fff6e5;
+
+  // Avatar gradient
+  --sd-avatar-gradient: linear-gradient(135deg, #d9e4f8 0%, #f7dce8 100%);
+  --sd-portrait-gradient: linear-gradient(137deg, #e3ebfa 0%, #f8e3ee 100%);
+
+  // Typography
+  --sd-font: 'Noto Sans Georgian', 'Noto Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --sd-font-digits: 'Sora', 'Noto Sans Georgian', system-ui, sans-serif;
+
+  // Radii
+  --sd-radius-sm: 10px;
+  --sd-radius-md: 12px;
+  --sd-radius-chip: 14px;
+  --sd-radius-lg: 16px;
+  --sd-radius-card: 18px;
+  --sd-radius-feature: 20px;
+  --sd-radius-xl: 24px;
+  --sd-radius-pill: 999px;
+
+  // Spacing scale
+  --sd-space-4: 4px;
+  --sd-space-8: 8px;
+  --sd-space-12: 12px;
+  --sd-space-16: 16px;
+  --sd-space-24: 24px;
+  --sd-space-32: 32px;
+  --sd-space-48: 48px;
+  --sd-space-88: 88px;
+
+  // Layout
+  --sd-container: 1200px;
+  --sd-gutter: 24px;
+  --sd-header-height: 80px;
+  --sd-section-gap: 88px;
+
+  // Effects
+  --sd-shadow-card: 0 18px 40px -24px rgb(8 69 181 / 28%);
+  --sd-shadow-float: 0 20px 44px -20px rgb(14 34 68 / 30%);
+  --sd-focus-ring: 0 0 0 3px rgb(8 69 181 / 28%);
+  --sd-transition: 160ms ease;
+
+  @media (max-width: 767px) {
+    --sd-gutter: 20px;
+    --sd-header-height: 64px;
+    --sd-section-gap: 56px;
+  }
+}

@@ -1,0 +1,80 @@
+@let copy = text();
+@let contact = site.contact();
+
+<footer>
+  @if (site.funding(); as funding) {
+    <section class="funding" id="funding-band" [attr.aria-label]="copy.partners.funder">
+      <div class="sd-container funding-inner">
+        <p class="funding-text">{{ funding.fullText }}</p>
+        @if (logos().length > 0) {
+          <ul class="logos" role="list">
+            @for (partner of logos(); track partner.organizationId) {
+              <li><sd-partner-card [partner]="partner" /></li>
+            }
+          </ul>
+        }
+      </div>
+    </section>
+  }
+
+  <div class="sd-container columns">
+    <div class="about">
+      <a class="brand" [routerLink]="homePath()" [attr.aria-label]="copy.brand.homeLink">
+        <img src="brand/symbol.png" alt="" width="34" height="44" />
+        <span class="wordmark">
+          <span class="name">{{ copy.brand.name }}</span>
+          <span class="tagline">{{ copy.brand.tagline }}</span>
+        </span>
+      </a>
+      <p class="sd-small description">{{ copy.footer.description }}</p>
+      <p class="grant">
+        <span class="sd-digits">{{ copy.brand.grantCode }}</span>
+      </p>
+    </div>
+
+    <nav class="column" [attr.aria-label]="copy.footer.project">
+      <h2 class="heading">{{ copy.footer.project }}</h2>
+      <ul role="list">
+        @for (link of projectLinks(); track link.path) {
+          <li><a [routerLink]="link.path">{{ link.label }}</a></li>
+        }
+      </ul>
+    </nav>
+
+    <nav class="column" [attr.aria-label]="copy.footer.people">
+      <h2 class="heading">{{ copy.footer.people }}</h2>
+      <ul role="list">
+        @for (link of peopleLinks(); track link.path) {
+          <li><a [routerLink]="link.path">{{ link.label }}</a></li>
+        }
+      </ul>
+    </nav>
+
+    <div class="column">
+      <h2 class="heading">{{ copy.footer.contact }}</h2>
+      <ul role="list" class="contact">
+        @if (contact?.person; as person) {
+          <li>{{ person }}</li>
+        }
+        @if (contact?.email; as email) {
+          <li><a [href]="'mailto:' + email">{{ email }}</a></li>
+        }
+        @if (contact?.phone; as phone) {
+          <li><a [href]="'tel:' + phone">{{ phone }}</a></li>
+        }
+        @for (social of site.socialLinks(); track social.url) {
+          <li>
+            <a class="social" [href]="social.url" target="_blank" rel="noopener">{{ social.platform }} ↗</a>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="sd-container bottom-inner">
+      <p>© {{ year }} {{ copy.brand.name }} · <span class="sd-digits">{{ copy.brand.grantCode }}</span></p>
+      <p>{{ displayUrl() }}</p>
+    </div>
+  </div>
+</footer>

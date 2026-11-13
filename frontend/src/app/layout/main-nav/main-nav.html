@@ -1,0 +1,45 @@
+<nav [attr.aria-label]="label()">
+  <ul class="menu" role="list">
+    @for (entry of entries(); track entry.key) {
+      @if (entry.kind === 'group') {
+        <li class="item has-children" [class.is-open]="openGroup() === entry.key">
+          <button
+            type="button"
+            class="link toggle"
+            [attr.aria-expanded]="openGroup() === entry.key"
+            [attr.aria-controls]="'submenu-' + entry.key"
+            (click)="toggleGroup(entry.key)"
+          >
+            {{ entry.label }}
+            <sd-icon class="chevron" name="chevron-down" [size]="16" />
+          </button>
+          <ul class="submenu" role="list" [id]="'submenu-' + entry.key">
+            @for (child of entry.children; track child.key) {
+              <li>
+                <a
+                  class="sublink"
+                  [routerLink]="child.path"
+                  routerLinkActive="is-active"
+                  ariaCurrentWhenActive="page"
+                  (click)="followLink()"
+                  >{{ child.label }}</a
+                >
+              </li>
+            }
+          </ul>
+        </li>
+      } @else {
+        <li class="item">
+          <a
+            class="link"
+            [routerLink]="entry.path"
+            routerLinkActive="is-active"
+            ariaCurrentWhenActive="page"
+            (click)="followLink()"
+            >{{ entry.label }}</a
+          >
+        </li>
+      }
+    }
+  </ul>
+</nav>

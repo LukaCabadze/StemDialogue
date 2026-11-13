@@ -1,0 +1,22 @@
+<article class="card">
+  <div class="portrait">
+    @if (photo(); as image) {
+      <img [src]="image.url" [alt]="image.alt || name()" loading="lazy" decoding="async" />
+    } @else {
+      <sd-avatar [name]="name()" [size]="88" tone="white" />
+    }
+  </div>
+  @if (role(); as roleText) {
+    <p class="role">{{ roleText }}</p>
+  }
+  <h3 class="sd-h3 name">
+    @if (path(); as link) {
+      <a [routerLink]="link">{{ name() }}</a>
+    } @else {
+      {{ name() }}
+    }
+  </h3>
+  @if (description(); as descriptionText) {
+    <p class="sd-small">{{ descriptionText }}</p>
+  }
+</article>

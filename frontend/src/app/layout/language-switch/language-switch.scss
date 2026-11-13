@@ -1,0 +1,32 @@
+@use 'mixins' as *;
+
+.switch {
+  display: inline-flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.option {
+  padding: 6px 4px;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sd-muted);
+  transition: color var(--sd-transition);
+  @include focus-ring;
+
+  &:hover {
+    color: var(--sd-ink);
+  }
+
+  &.is-active {
+    font-weight: 700;
+    color: var(--sd-blue);
+  }
+}
+
+.separator {
+  color: var(--sd-border-strong);
+}

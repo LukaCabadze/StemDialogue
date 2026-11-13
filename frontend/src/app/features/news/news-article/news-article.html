@@ -1,0 +1,40 @@
+@let copy = text().news;
+@let item = article();
+
+<article class="article">
+  <header class="sd-stack">
+    <div class="meta">
+      <sd-pill [tone]="categoryTone()">{{ item.categoryLabel }}</sd-pill>
+      <span class="sd-meta">
+        <time [attr.datetime]="item.publishedAt">{{ item.publishedAt | sdDate: 'long' : language() }}</time>
+        · {{ minutes() }} {{ copy.readingTime }}
+      </span>
+    </div>
+    <h1 class="sd-h1">{{ item.title }}</h1>
+    <p class="sd-lead">{{ item.summary }}</p>
+  </header>
+
+  <figure class="cover">
+    <div class="cover-frame">
+      <sd-cover-art [variant]="coverVariant()" [image]="item.cover" />
+    </div>
+    @if (caption(); as captionText) {
+      <figcaption class="sd-meta">{{ captionText }}</figcaption>
+    }
+  </figure>
+
+  <sd-rich-text [html]="item.bodyHtml" />
+
+  @if (item.gallery.length > 0) {
+    <sd-gallery-grid [items]="item.gallery" [label]="text().events.gallery" />
+  }
+
+  <footer class="footer">
+    <ul class="sd-pill-row" role="list">
+      @for (tag of item.tags; track tag.slug) {
+        <li><sd-pill>{{ tag.name }}</sd-pill></li>
+      }
+    </ul>
+    <sd-share-buttons [path]="item.path" />
+  </footer>
+</article>

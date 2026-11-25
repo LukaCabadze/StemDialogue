@@ -16,8 +16,9 @@
   flex-direction: column;
   gap: var(--sd-space-12);
   padding: 28px;
+  border: 1px solid var(--sd-border);
   border-radius: var(--sd-radius-card);
-  background: var(--sd-soft);
+  background: var(--sd-page);
 }
 
 .icon-box {
@@ -28,7 +29,7 @@
   height: 44px;
   margin-bottom: var(--sd-space-4);
   border-radius: var(--sd-radius-md);
-  background: var(--sd-page);
+  background: var(--sd-blue-tint);
   color: var(--sd-blue);
 }
 
@@ -39,6 +40,7 @@
   overflow: hidden;
   border: 1px solid var(--sd-border);
   border-radius: var(--sd-radius-card);
+  background: var(--sd-page);
 
   @include tablet-down {
     grid-template-columns: repeat(2, minmax(0, 1fr));

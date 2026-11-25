@@ -6,12 +6,13 @@ import { LanguageService } from '../../../core/i18n/language.service';
 import { EventCardDto, PageDto } from '../../../core/models';
 import { ProjectContext } from '../../../core/project/project-context.service';
 import { ActionLink } from '../../../shared/ui/action-link/action-link';
+import { AtomMark } from '../../../shared/ui/atom-mark/atom-mark';
 import { DateChip } from '../../../shared/ui/date-chip/date-chip';
 
 /** Home hero: project pill, title + tagline, lead, two actions, brand orbit and next-meeting card. */
 @Component({
   selector: 'sd-home-hero',
-  imports: [RouterLink, ActionLink, DateChip],
+  imports: [RouterLink, ActionLink, AtomMark, DateChip],
   templateUrl: './home-hero.html',
   styleUrl: './home-hero.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -4,9 +4,7 @@
   position: relative;
   overflow: hidden;
   padding-top: 72px;
-  background:
-    radial-gradient(circle at 82% 30%, rgb(236 54 126 / 9%) 0%, rgb(236 54 126 / 0%) 42%),
-    linear-gradient(180deg, #f9fbff 0%, var(--sd-page) 100%);
+  background: radial-gradient(circle at 82% 30%, rgb(236 54 126 / 9%) 0%, rgb(236 54 126 / 0%) 42%);
 
   @include mobile {
     padding-top: 40px;
@@ -133,20 +131,13 @@
   background: radial-gradient(circle at 35% 30%, var(--sd-page) 0%, var(--sd-blue-tint) 62%, #dde8fb 100%);
   box-shadow: 0 40px 80px -36px rgb(8 69 181 / 55%);
 
-  img {
-    width: 170px;
-    height: 217px;
-    object-fit: contain;
-    mix-blend-mode: multiply;
-  }
-
   @include mobile {
     width: 230px;
     height: 230px;
 
-    img {
-      width: 115px;
-      height: auto;
+    .atom {
+      width: 156px !important;
+      height: 156px !important;
     }
   }
 }

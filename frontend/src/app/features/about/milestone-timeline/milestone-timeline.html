@@ -1,22 +1,34 @@
-<ol class="timeline" role="list">
-  @for (milestone of milestones(); track milestone.id) {
+<ol class="timeline" role="list" [style.--progress]="progress() + 'px'">
+  @for (milestone of milestones(); track milestone.id; let index = $index) {
     <li
+      #stage
       class="item"
       [class.is-done]="milestone.state === 'Done'"
       [class.is-current]="milestone.state === 'Current'"
-      [attr.aria-current]="milestone.state === 'Current' ? 'step' : null"
+      [class.is-active]="index === active()"
+      [class.is-passed]="index < active()"
     >
-      <span class="marker" aria-hidden="true"></span>
-      <div class="content">
+      <button
+        type="button"
+        class="marker"
+        [attr.aria-label]="milestone.title"
+        [attr.aria-pressed]="index === active()"
+        [attr.aria-current]="milestone.state === 'Current' ? 'step' : null"
+        (click)="select(index)"
+      >
+        <span class="dot"></span>
+      </button>
+
+      <div class="content" (click)="select(index)">
         @if (milestone.periodLabel) {
           <p class="period sd-digits">{{ milestone.periodLabel }}</p>
         }
-        <h3 class="sd-h3">{{ milestone.title }}</h3>
+        <h3 class="sd-h3 title">{{ milestone.title }}</h3>
         @if (milestone.description) {
           <p class="sd-body">{{ milestone.description }}</p>
         }
         @if (milestone.location) {
-          <p class="sd-meta">{{ milestone.location }}</p>
+          <p class="sd-meta location">{{ milestone.location }}</p>
         }
       </div>
     </li>

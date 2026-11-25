@@ -1,0 +1,51 @@
+<div #track class="track" [style.height.px]="height()">
+  <svg class="lines" [attr.viewBox]="viewBox()" aria-hidden="true" focusable="false">
+    <path class="line line--ahead" [attr.d]="path()" [attr.stroke-width]="stroke()" />
+    <path
+      #line
+      class="line line--drawn"
+      [attr.d]="path()"
+      [attr.stroke-width]="stroke()"
+      pathLength="1"
+      [style.stroke-dashoffset]="1 - drawn()"
+    />
+  </svg>
+
+  <ol class="stops" role="list">
+    @for (stop of stops(); track stop.partner.organizationId) {
+      <li
+        class="stop"
+        [class.is-reached]="reached(stop)"
+        [class.side-left]="stop.side === 'left'"
+        [class.side-right]="stop.side === 'right'"
+        [style.left.px]="stop.x"
+        [style.top.px]="stop.y"
+      >
+        <span class="node">
+          @if (stop.logo) {
+            <img [src]="stop.logo" [alt]="stop.partner.name" loading="lazy" />
+          } @else {
+            <span class="node-text">{{ stop.partner.shortName }}</span>
+          }
+        </span>
+
+        <div class="label">
+          <p class="name">{{ stop.partner.shortName }}</p>
+          @if (stop.partner.websiteUrl) {
+            <a class="pill" [href]="stop.partner.websiteUrl" target="_blank" rel="noopener">
+              <span class="pill-role">{{ stop.roleLabel }}</span>
+              <span class="pill-name">{{ stop.partner.name }}</span>
+              <span class="pill-domain">{{ stop.domain }} ↗</span>
+              <span class="sd-sr-only">({{ text().common.newTab }})</span>
+            </a>
+          } @else {
+            <p class="pill">
+              <span class="pill-role">{{ stop.roleLabel }}</span>
+              <span class="pill-name">{{ stop.partner.name }}</span>
+            </p>
+          }
+        </div>
+      </li>
+    }
+  </ol>
+</div>

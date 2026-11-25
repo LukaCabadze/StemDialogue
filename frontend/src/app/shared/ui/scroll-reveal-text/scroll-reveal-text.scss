@@ -1,0 +1,80 @@
+:host {
+  display: block;
+  text-align: center;
+}
+
+// Tall scroll track; the stage stays pinned under the header while the text fills in.
+:host(.is-pinned) {
+  height: 240vh;
+
+  .stage {
+    position: sticky;
+    top: var(--sd-header-height);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100vh - var(--sd-header-height));
+    min-height: calc(100svh - var(--sd-header-height));
+  }
+}
+
+.overline {
+  margin: 0 0 32px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sd-ink);
+}
+
+.statement {
+  margin: 0 auto;
+  max-width: 1180px;
+  font-size: clamp(34px, 4.4vw, 72px);
+  font-weight: 800;
+  line-height: 1.16;
+  letter-spacing: -0.025em;
+  color: var(--sd-ink);
+}
+
+.word {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.glyph {
+  display: inline-block;
+  transform-origin: 50% 85%;
+  will-change: transform, color;
+}
+
+.tag {
+  position: absolute;
+  bottom: 72%;
+  left: 18%;
+  z-index: 1;
+  padding: 0.42em 1.05em;
+  border-radius: var(--sd-radius-pill);
+  background: var(--sd-blue);
+  box-shadow: 0 10px 24px rgb(8 69 181 / 28%);
+  font-size: clamp(13px, 1.05vw, 17px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: var(--sd-on-brand);
+  white-space: nowrap;
+  transform: rotate(-12deg) scale(0);
+  transform-origin: 20% 100%;
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  &.is-visible {
+    transform: rotate(-4deg) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tag {
+    transition: none;
+  }
+}

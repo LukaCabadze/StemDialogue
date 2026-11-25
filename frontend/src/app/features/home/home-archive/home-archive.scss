@@ -1,7 +1,8 @@
 @use 'mixins' as *;
 
 .archive {
-  background: var(--sd-night);
+  // The torn edges add their own height, so the band needs less inner padding.
+  padding-block: var(--sd-space-48);
 }
 
 .grid {

@@ -8,11 +8,12 @@ import { CoverArt } from '../../../shared/ui/cover-art/cover-art';
 import { ResourceItem } from '../../../shared/ui/resource-item/resource-item';
 import { SectionHeader } from '../../../shared/ui/section-header/section-header';
 import { StatusPill } from '../../../shared/ui/status-pill/status-pill';
+import { TornBand } from '../../../shared/ui/torn-band/torn-band';
 
 /** "04 · Archive" on the dark band: the latest recording and a list of recent materials. */
 @Component({
   selector: 'sd-home-archive',
-  imports: [RouterLink, SdDatePipe, CoverArt, ResourceItem, SectionHeader, StatusPill],
+  imports: [RouterLink, SdDatePipe, CoverArt, ResourceItem, SectionHeader, StatusPill, TornBand],
   templateUrl: './home-archive.html',
   styleUrl: './home-archive.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

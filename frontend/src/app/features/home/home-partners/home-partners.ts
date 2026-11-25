@@ -2,12 +2,13 @@ import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core
 
 import { LanguageService } from '../../../core/i18n/language.service';
 import { FundingDto } from '../../../core/models';
-import { PartnerGroups } from '../../../shared/ui/partner-groups/partner-groups';
+import { SectionHeader } from '../../../shared/ui/section-header/section-header';
+import { PartnerJourney } from '../partner-journey/partner-journey';
 
-/** "07 · Partners": funder and partner universities in clearly separated groups. */
+/** "07 · Partners": the funder and partner universities as a scroll-drawn journey. */
 @Component({
   selector: 'sd-home-partners',
-  imports: [PartnerGroups],
+  imports: [PartnerJourney, SectionHeader],
   templateUrl: './home-partners.html',
   styleUrl: './home-partners.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

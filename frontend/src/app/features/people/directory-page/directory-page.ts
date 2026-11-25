@@ -12,7 +12,8 @@ import { ErrorState } from '../../../shared/ui/error-state/error-state';
 import { LoadMore } from '../../../shared/ui/load-more/load-more';
 import { LoadingState } from '../../../shared/ui/loading-state/loading-state';
 import { PageHero } from '../../../shared/ui/page-hero/page-hero';
-import { PersonCard } from '../../../shared/ui/person-card/person-card';
+import { PersonDeck } from '../../../shared/ui/person-deck/person-deck';
+import { DeckPerson } from '../../../shared/ui/person-deck/person-deck.model';
 import { SearchBox } from '../../../shared/ui/search-box/search-box';
 
 const PAGE_SIZE = 12;
@@ -20,7 +21,7 @@ const PAGE_SIZE = 12;
 /** Researchers or mentors directory (chosen by route data), searchable by name. */
 @Component({
   selector: 'sd-directory-page',
-  imports: [EmptyState, ErrorState, LoadMore, LoadingState, PageHero, PersonCard, SearchBox],
+  imports: [EmptyState, ErrorState, LoadMore, LoadingState, PageHero, PersonDeck, SearchBox],
   templateUrl: './directory-page.html',
   styleUrl: './directory-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -67,9 +68,21 @@ export class DirectoryPage {
     });
   }
 
-  protected description(person: PersonCardDto): string | null {
-    const parts = [person.academicTitle, person.organization].filter((part): part is string => !!part);
-    return parts.length > 0 ? parts.join(' · ') : person.shortBio;
+  protected readonly deck = computed<readonly DeckPerson[]>(() =>
+    this.people.items().map((person) => this.toDeckPerson(person)),
+  );
+
+  private toDeckPerson(person: PersonCardDto): DeckPerson {
+    const credentials = [person.academicTitle, person.organization].filter((part): part is string => !!part).join(', ');
+    return {
+      key: person.slug,
+      name: person.fullName,
+      photo: person.photo,
+      title: person.position ?? this.title(),
+      meta: person.organization,
+      text: person.shortBio ?? (credentials || null),
+      path: person.path,
+    };
   }
 
   protected search(q: string): void {

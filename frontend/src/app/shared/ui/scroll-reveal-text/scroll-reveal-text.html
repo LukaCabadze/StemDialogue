@@ -1,0 +1,26 @@
+<div class="stage">
+  @if (overline(); as label) {
+    <p class="overline">{{ label }}</p>
+  }
+
+  <p class="statement">
+    <span class="sd-sr-only">{{ plain() }}</span>
+    @let glyphStyles = styles();
+    @for (word of words(); track $index) {
+      <span class="word" [class.is-tagged]="word.tagged" aria-hidden="true">
+        @for (glyph of word.glyphs; track glyph.index) {
+          <span
+            class="glyph"
+            [style.color]="glyphStyles[glyph.index]?.color"
+            [style.transform]="glyphStyles[glyph.index]?.transform"
+            >{{ glyph.char }}</span
+          >
+        }
+        @if (word.tagged && tag()) {
+          <span class="tag" [class.is-visible]="tagVisible()">{{ tag() }}</span>
+        }
+      </span>
+      {{ ' ' }}
+    }
+  </p>
+</div>

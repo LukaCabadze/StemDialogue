@@ -17,8 +17,14 @@ body {
   font-size: 15px;
   line-height: 1.75;
   color: var(--sd-ink);
-  background: var(--sd-page);
+  background-color: var(--sd-paper);
+  background-image:
+    linear-gradient(var(--sd-grid-line) 2px, transparent 2px),
+    linear-gradient(90deg, var(--sd-grid-line) 2px, transparent 2px);
+  background-position: 0 0, 0 0;
+  background-size: var(--sd-grid-size) var(--sd-grid-size), var(--sd-grid-size) var(--sd-grid-size);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 

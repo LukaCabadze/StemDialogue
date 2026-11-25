@@ -1,0 +1,71 @@
+@let copy = text().people;
+
+<section class="panel" [attr.aria-label]="label()" aria-roledescription="carousel">
+  <div class="stack">
+    @for (person of people(); track person.key; let index = $index) {
+      <article
+        class="card"
+        [class.is-front]="depth(index) === 0"
+        [class.is-hidden]="isHidden(person, index)"
+        [style.transform]="transform(person, index)"
+        [style.z-index]="zIndex(person, index)"
+        [attr.aria-hidden]="depth(index) === 0 ? null : 'true'"
+        [attr.inert]="depth(index) === 0 ? null : ''"
+        (click)="onCardClick(index, $event)"
+      >
+        @if (person.title) {
+          <h3 class="title">{{ person.title }}</h3>
+        }
+        <div class="body">
+          <div class="who">
+            <sd-avatar [name]="person.name" [photo]="person.photo" [size]="156" />
+            <p class="name">{{ person.name }}</p>
+            @if (person.meta) {
+              <p class="meta">{{ person.meta }}</p>
+            }
+          </div>
+          <div class="about">
+            @if (person.text) {
+              <p class="text">{{ person.text }}</p>
+            }
+            @if (person.path) {
+              <a class="sd-text-link profile" [routerLink]="person.path">
+                {{ text().events.profile }}
+                <sd-icon name="arrow-right" />
+              </a>
+            }
+          </div>
+        </div>
+      </article>
+    }
+  </div>
+
+  @if (count() > 1) {
+    <nav class="dashes" [attr.aria-label]="label()">
+      @for (person of people(); track person.key; let index = $index) {
+        <button
+          type="button"
+          class="dash"
+          [class.is-active]="index === current()"
+          [attr.aria-label]="person.name + ' — ' + (index + 1) + ' / ' + count()"
+          [attr.aria-current]="index === current() ? 'true' : null"
+          (click)="goTo(index)"
+        ></button>
+      }
+    </nav>
+
+    <div class="controls">
+      <button type="button" class="control" [attr.aria-label]="copy.deckPrevious" (click)="previous()">
+        <sd-icon name="arrow-left" />
+      </button>
+      <span class="counter sd-digits" aria-live="polite">
+        {{ current() + 1 }} / {{ count() }}
+        <span class="sd-sr-only">: {{ front()?.name }}</span>
+      </span>
+      <button type="button" class="control" [attr.aria-label]="copy.deckNext" (click)="next()">
+        <sd-icon name="arrow-right" />
+      </button>
+    </div>
+    <p class="hint">{{ copy.deckHint }}</p>
+  }
+</section>

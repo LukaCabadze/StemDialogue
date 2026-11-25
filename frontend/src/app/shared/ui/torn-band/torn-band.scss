@@ -1,0 +1,42 @@
+@use 'mixins' as *;
+
+:host {
+  --band: var(--sd-night);
+
+  display: block;
+  position: relative;
+  color: var(--band);
+}
+
+:host(.tone-blue) {
+  --band: var(--sd-blue);
+}
+
+:host(.tone-pink) {
+  --band: var(--sd-pink);
+}
+
+.body {
+  position: relative;
+  background: var(--band);
+}
+
+.edge {
+  display: block;
+  width: 100%;
+  height: 56px;
+  fill: currentColor;
+
+  @include mobile {
+    height: 28px;
+  }
+}
+
+// Overlap by a pixel so no hairline shows between the edges and the band body.
+.edge--top {
+  margin-bottom: -1px;
+}
+
+.edge--bottom {
+  margin-top: -1px;
+}

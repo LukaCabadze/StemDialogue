@@ -178,6 +178,10 @@ export const UI_TEXT_EN: UiText = {
     details: 'Details',
     archive: 'Archive',
     empty: 'Profiles will be added soon.',
+    deckNext: 'Next',
+    deckPrevious: 'Previous',
+    deckHint: 'Click the card to see the next person',
+    deckOf: 'of',
     sections: {
       CoreTeam: { tab: 'Project team', overline: 'Official grant team', lead: '' },
       Consultant: {
@@ -225,6 +229,32 @@ export const UI_TEXT_EN: UiText = {
     school: 'School',
     region: 'Region',
     empty: 'Initiatives will be added soon.',
+    manifestoOverline: 'A bit about the ambassadors',
+    manifesto:
+      'We believe science starts beyond the classroom walls. That is why STEM {ambassadors} carry what they learn back to their own schools, run experiments with their classmates and prove that a good question is already the start of a discovery.',
+    manifestoTag: 'Future scientists',
+  },
+  about: {
+    storyLabel: 'The project in short',
+    timelineHint: 'Click a stage',
+    story: [
+      {
+        title: 'Why',
+        text: 'In many Georgian schools, students rarely get the chance to talk to a scientist. We close that gap: researchers come to the classroom themselves, first online and then in person.',
+      },
+      {
+        title: 'How',
+        text: 'Every Saturday a researcher talks about one question: how a machine learns, why a bridge stands, what chemistry happens in the kitchen. Students ask questions, repeat the experiments and keep the materials.',
+      },
+      {
+        title: 'Who',
+        text: 'Two universities, BTU and ATSU, lead the project. Researchers, mentors and students from regional schools take part, and the students become STEM Ambassadors.',
+      },
+      {
+        title: 'What stays',
+        text: 'Every recording and material stays open. The best school initiatives are presented at the midterm forum, and the project ends with a final event and awards.',
+      },
+    ],
   },
   contact: {
     title: 'Contact',

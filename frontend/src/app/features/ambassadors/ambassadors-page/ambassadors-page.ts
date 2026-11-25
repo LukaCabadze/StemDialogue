@@ -11,15 +11,15 @@ import { EmptyState } from '../../../shared/ui/empty-state/empty-state';
 import { ErrorState } from '../../../shared/ui/error-state/error-state';
 import { LoadMore } from '../../../shared/ui/load-more/load-more';
 import { LoadingState } from '../../../shared/ui/loading-state/loading-state';
-import { NumberedSteps } from '../../../shared/ui/numbered-steps/numbered-steps';
 import { PageHero } from '../../../shared/ui/page-hero/page-hero';
 import { RichText } from '../../../shared/ui/rich-text/rich-text';
+import { ScrollRevealText } from '../../../shared/ui/scroll-reveal-text/scroll-reveal-text';
 import { SectionHeader } from '../../../shared/ui/section-header/section-header';
 import { ActivityCard } from '../activity-card/activity-card';
 
 const PAGE_SIZE = 9;
 
-/** STEM Ambassadors programme page plus the archive of school initiatives. */
+/** STEM Ambassadors programme page: scroll-read manifesto plus the archive of school initiatives. */
 @Component({
   selector: 'sd-ambassadors-page',
   imports: [
@@ -28,9 +28,9 @@ const PAGE_SIZE = 9;
     ErrorState,
     LoadMore,
     LoadingState,
-    NumberedSteps,
     PageHero,
     RichText,
+    ScrollRevealText,
     SectionHeader,
   ],
   templateUrl: './ambassadors-page.html',

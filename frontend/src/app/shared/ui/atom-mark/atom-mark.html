@@ -1,0 +1,19 @@
+<svg
+  viewBox="-120 -120 240 240"
+  [attr.role]="label() ? 'img' : null"
+  [attr.aria-label]="label() || null"
+  [attr.aria-hidden]="label() ? null : 'true'"
+  focusable="false"
+>
+  <g [attr.transform]="'rotate(' + spin() + ')'">
+    @for (orbit of orbits; track orbit.angle; let index = $index) {
+      <g [attr.transform]="'rotate(' + orbit.angle + ')'" [class]="'orbit orbit--' + orbit.tone">
+        <ellipse cx="0" cy="0" [attr.rx]="rx" [attr.ry]="ry" />
+        <circle class="electron" [attr.cx]="electrons()[index].x" [attr.cy]="electrons()[index].y" r="10" />
+      </g>
+    }
+  </g>
+  <circle class="nucleus-glow" cx="0" cy="0" r="30" />
+  <circle class="nucleus" cx="0" cy="0" r="19" />
+  <circle class="nucleus-shine" cx="-6" cy="-6" r="5" />
+</svg>

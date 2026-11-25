@@ -1,0 +1,264 @@
+// Wavelengths below must match WAVE_A / WAVE_B / BAND_* in lab-frame.geometry.ts.
+$glass: #eaf1fd;
+$liquid-back: #5f8de0;
+$band-back: #dbe6fb;
+$band-front: #9dbaf0;
+
+:host {
+  position: relative;
+  display: block;
+  overflow-x: clip;
+}
+
+// Room for the tube on top, the flasks on the sides and the liquid band below.
+// Side padding matches SIDE_PAD in lab-frame.geometry.ts (it only narrows the content below ~1540px).
+.content {
+  position: relative;
+  z-index: 1;
+  padding: 112px 146px 136px;
+}
+
+.art {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+// Matches MIN_FRAME_WIDTH in lab-frame.geometry.ts.
+@media (max-width: 1199px) {
+  .content {
+    padding: 0;
+  }
+
+  .art {
+    display: none;
+  }
+}
+
+// ── Tube ────────────────────────────────────────────────────────────────
+.tube {
+  fill: none;
+  stroke-linecap: butt;
+  stroke-linejoin: round;
+  stroke-dasharray: 1 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1.8s cubic-bezier(0.65, 0, 0.35, 1);
+
+  &--outer {
+    stroke: var(--sd-ink);
+    stroke-width: 30;
+  }
+
+  &--inner {
+    stroke: $glass;
+    stroke-width: 21;
+  }
+}
+
+.tube-flow {
+  fill: none;
+  stroke: var(--sd-blue);
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-dasharray: 16 30;
+  opacity: 0;
+  transition: opacity 0.6s ease 1.7s;
+  animation: lab-flow 1.4s linear infinite;
+}
+
+// ── Flasks ──────────────────────────────────────────────────────────────
+.glass {
+  fill: $glass;
+  fill-opacity: 0.72;
+}
+
+.outline {
+  fill: none;
+  stroke: var(--sd-ink);
+  stroke-width: 5;
+  stroke-linejoin: round;
+}
+
+.rim {
+  fill: $glass;
+  stroke: var(--sd-ink);
+  stroke-width: 5;
+}
+
+.arm {
+  stroke-linecap: round;
+
+  &--outer {
+    stroke: var(--sd-ink);
+    stroke-width: 17;
+  }
+
+  &--inner {
+    stroke: $glass;
+    stroke-width: 7;
+  }
+}
+
+.liquid {
+  transform: translateY(96px);
+  transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1) 1.2s;
+}
+
+.liquid-back {
+  fill: $liquid-back;
+}
+
+.liquid-front {
+  fill: var(--sd-blue);
+}
+
+.bubble {
+  fill: #ffffff;
+  opacity: 0;
+  animation: lab-bubble 2.8s ease-in infinite;
+}
+
+.drop {
+  fill: var(--sd-blue);
+  stroke: var(--sd-ink);
+  stroke-width: 3;
+  animation: lab-bob 3.6s ease-in-out infinite;
+}
+
+// ── Liquid band ─────────────────────────────────────────────────────────
+.band {
+  opacity: 0;
+  transition: opacity 1s ease 0.3s;
+}
+
+.wave--band-back {
+  fill: $band-back;
+  animation: lab-wave-band-back 14s linear infinite;
+}
+
+.wave--band-front {
+  fill: $band-front;
+  animation: lab-wave-band-front 9s linear infinite reverse;
+}
+
+.wave--a {
+  animation: lab-wave-a 3.2s linear infinite;
+}
+
+.wave--b {
+  animation: lab-wave-b 2.4s linear infinite reverse;
+}
+
+// ── Reveal ──────────────────────────────────────────────────────────────
+:host(.is-visible) {
+  .tube {
+    stroke-dashoffset: 0;
+  }
+
+  .tube-flow {
+    opacity: 0.9;
+  }
+
+  .liquid {
+    transform: none;
+  }
+
+  .band {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tube,
+  .tube-flow,
+  .liquid,
+  .band {
+    transition: none;
+  }
+
+  .tube {
+    stroke-dashoffset: 0;
+  }
+
+  .tube-flow {
+    opacity: 0.9;
+  }
+
+  .liquid {
+    transform: none;
+  }
+
+  .band {
+    opacity: 1;
+  }
+
+  .tube-flow,
+  .wave,
+  .bubble,
+  .drop {
+    animation: none;
+  }
+}
+
+@keyframes lab-flow {
+  to {
+    stroke-dashoffset: -46;
+  }
+}
+
+@keyframes lab-wave-a {
+  to {
+    transform: translateX(-60px);
+  }
+}
+
+@keyframes lab-wave-b {
+  to {
+    transform: translateX(-84px);
+  }
+}
+
+@keyframes lab-wave-band-back {
+  to {
+    transform: translateX(-360px);
+  }
+}
+
+@keyframes lab-wave-band-front {
+  to {
+    transform: translateX(-280px);
+  }
+}
+
+@keyframes lab-bubble {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+
+  15% {
+    opacity: 0.85;
+  }
+
+  75% {
+    opacity: 0.6;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-66px);
+  }
+}
+
+@keyframes lab-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-9px);
+  }
+}

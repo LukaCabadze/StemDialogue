@@ -10,19 +10,7 @@
   } @else if (people.items().length === 0) {
     <sd-empty-state icon="users" [title]="q() ? text().common.noResults : text().people.empty" />
   } @else {
-    <ul class="grid" role="list">
-      @for (person of people.items(); track person.slug) {
-        <li>
-          <sd-person-card
-            [name]="person.fullName"
-            [photo]="person.photo"
-            [role]="person.position"
-            [description]="description(person)"
-            [path]="person.path"
-          />
-        </li>
-      }
-    </ul>
+    <sd-person-deck [people]="deck()" [label]="title()" />
     <sd-load-more [hasMore]="people.hasMore()" [loading]="people.isLoading()" (more)="people.loadMore()" />
   }
 </section>

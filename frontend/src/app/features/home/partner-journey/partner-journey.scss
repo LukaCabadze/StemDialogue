@@ -1,0 +1,241 @@
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+.track {
+  position: relative;
+  width: 100%;
+}
+
+.lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  // The curve runs on past the last partner and off the right edge, like the original; crop it.
+  overflow: hidden;
+}
+
+// Stroke width comes from the layout (scales with the page, like the original drawing).
+.line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.line--ahead {
+  stroke: #c9d8f4;
+}
+
+.line--drawn {
+  stroke: var(--sd-blue);
+  stroke-dasharray: 1;
+  transition: stroke-dashoffset 120ms linear;
+}
+
+.stops {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stop {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+// Logo tile sitting on the line, tilted like a sticker.
+.node {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 132px;
+  height: 132px;
+  padding: 18px;
+  border: 3px solid var(--sd-blue);
+  border-radius: 30px;
+  background: var(--sd-page);
+  box-shadow: 0 0 0 10px var(--sd-blue-tint);
+  transform: translate(-50%, -50%) rotate(-8deg) scale(0.4);
+  opacity: 0;
+  transition:
+    transform 520ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 240ms ease;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  @include mobile {
+    width: 72px;
+    height: 72px;
+    padding: 10px;
+    border-radius: 22px;
+    box-shadow: 0 0 0 6px var(--sd-blue-tint);
+  }
+}
+
+.node-text {
+  font-family: var(--sd-font-digits);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--sd-blue);
+}
+
+.label {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: max-content;
+  max-width: min(520px, 42vw);
+  transform: translateY(-50%);
+
+  @include mobile {
+    gap: 8px;
+    max-width: 58vw;
+  }
+}
+
+.side-left .label {
+  right: 100px;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.side-right .label {
+  left: 100px;
+  align-items: flex-start;
+}
+
+// Phones: the label sits right next to the smaller tile.
+.side-left .label {
+  @include mobile {
+    right: 52px;
+  }
+}
+
+.side-right .label {
+  @include mobile {
+    left: 52px;
+  }
+}
+
+// Big partner name that pops up when the line arrives.
+.name {
+  font-family: var(--sd-font-digits), var(--sd-font);
+  font-size: clamp(44px, 5.4vw, 96px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -2px;
+  color: var(--sd-blue);
+  opacity: 0;
+  transform: translateY(40px) scale(0.92);
+  transition:
+    transform 560ms cubic-bezier(0.22, 1.4, 0.36, 1),
+    opacity 320ms ease;
+
+  @include mobile {
+    font-size: 36px;
+    letter-spacing: -1px;
+  }
+}
+
+// Caption pill, slightly rotated, popping in after the name.
+.pill {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: 360px;
+  margin: 0;
+  padding: 14px 22px;
+  border: 1.5px solid var(--sd-blue);
+  border-radius: 999px;
+  background: var(--sd-page);
+  color: var(--sd-blue);
+  opacity: 0;
+  transform: rotate(-4deg) scale(0.5);
+  transform-origin: center;
+  transition:
+    transform 520ms cubic-bezier(0.34, 1.7, 0.64, 1) 160ms,
+    opacity 260ms ease 160ms;
+
+  @include mobile {
+    padding: 8px 14px;
+    border-radius: 18px;
+  }
+}
+
+a.pill:hover {
+  background: var(--sd-blue-tint);
+}
+
+.side-right .pill {
+  transform: rotate(3deg) scale(0.5);
+}
+
+.pill-role {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.66px;
+  text-transform: uppercase;
+  color: var(--sd-pink-text);
+}
+
+.pill-name {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+
+  // Phones keep the caption short (role + website) so neighbouring stops never overlap.
+  @include mobile {
+    display: none;
+  }
+}
+
+.pill-domain {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.75;
+}
+
+.is-reached {
+  .node {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(-8deg) scale(1);
+  }
+
+  .name {
+    opacity: 1;
+    transform: none;
+  }
+
+  .pill {
+    opacity: 1;
+    transform: rotate(-4deg) scale(1);
+  }
+
+  &.side-right .pill {
+    transform: rotate(3deg) scale(1);
+  }
+}
+
+:host(.is-static) {
+  .node,
+  .name,
+  .pill {
+    transition: none;
+  }
+}

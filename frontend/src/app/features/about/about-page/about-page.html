@@ -13,15 +13,29 @@
   </sd-page-hero>
 
   <div class="sd-container body">
-    <div class="sd-detail-grid">
-      <div class="sd-stack">
+    <div class="sd-detail-grid layout">
+      <div class="story">
         @if (item.page.bodyHtml) {
-          <sd-rich-text [html]="item.page.bodyHtml" />
+          <sd-rich-text size="large" [html]="item.page.bodyHtml" />
         }
+        <ol class="chapters" role="list" [attr.aria-label]="text().about.storyLabel">
+          @for (chapter of text().about.story; track $index) {
+            <li class="chapter">
+              <p class="chapter-label">
+                <span class="sd-digits chapter-number">{{ ('0' + ($index + 1)).slice(-2) }}</span>
+                {{ chapter.title }}
+              </p>
+              <p class="chapter-text">{{ chapter.text }}</p>
+            </li>
+          }
+        </ol>
       </div>
       @if (item.milestones.length > 0) {
         <aside class="timeline-column" [attr.aria-label]="text().home.aboutOverline">
-          <sd-milestone-timeline [milestones]="item.milestones" />
+          <div class="timeline-sticky">
+            <p class="timeline-hint">{{ text().about.timelineHint }}</p>
+            <sd-milestone-timeline [milestones]="item.milestones" />
+          </div>
         </aside>
       }
     </div>

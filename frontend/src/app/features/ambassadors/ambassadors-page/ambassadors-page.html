@@ -7,14 +7,16 @@
 } @else {
   <sd-page-hero [crumbs]="crumbs()" [title]="title()" [lead]="data()?.page?.lead ?? null" />
 
-  <div class="sd-container intro">
-    <div class="sd-stack">
-      @if (data()?.page?.bodyHtml; as body) {
-        <sd-rich-text [html]="body" />
-      }
-    </div>
-    <sd-numbered-steps [steps]="copy.home.ambassadorSteps" />
-  </div>
+  <section class="sd-container manifesto" [attr.aria-label]="copy.ambassadors.manifestoOverline">
+    <sd-scroll-reveal-text
+      [overline]="copy.ambassadors.manifestoOverline"
+      [text]="copy.ambassadors.manifesto"
+      [tag]="copy.ambassadors.manifestoTag"
+    />
+    @if (data()?.page?.bodyHtml; as body) {
+      <sd-rich-text class="body" [html]="body" />
+    }
+  </section>
 
   <section class="sd-section sd-section--soft" aria-labelledby="activities-title">
     <div class="sd-container">

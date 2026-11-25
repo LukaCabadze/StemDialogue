@@ -1,20 +1,36 @@
+@use 'mixins' as *;
+
+$ease: cubic-bezier(0.22, 1, 0.36, 1);
+
 .timeline {
   position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--sd-space-24);
   margin: 0;
-  padding: 0 0 0 32px;
+  padding: 0 0 0 40px;
   list-style: none;
 
-  &::before {
+  // Grey rail with a pink line that grows down to the active stage.
+  &::before,
+  &::after {
     content: '';
     position: absolute;
-    top: 8px;
-    bottom: 8px;
-    left: 8px;
+    top: 15px;
+    left: 14px;
     width: 2px;
+    border-radius: 2px;
+  }
+
+  &::before {
+    bottom: 15px;
     background: var(--sd-border);
+  }
+
+  &::after {
+    height: max(0px, calc(var(--progress, 0px) - 15px));
+    background: linear-gradient(180deg, var(--sd-blue) 0%, var(--sd-pink) 100%);
+    transition: height 0.6s $ease;
   }
 }
 
@@ -22,29 +38,78 @@
   position: relative;
 }
 
+// ── Marker ──────────────────────────────────────────────────────────────
 .marker {
   position: absolute;
-  top: 6px;
-  left: -32px;
+  top: 0;
+  left: -40px;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  @include focus-ring;
+}
+
+.dot {
+  position: relative;
   width: 18px;
   height: 18px;
   border: 2px solid var(--sd-border-strong);
   border-radius: 50%;
   background: var(--sd-page);
+  transition:
+    transform 0.35s $ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 
-  .is-done & {
+  // Ring that pings out from the active stage.
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    border: 2px solid var(--sd-pink);
+    opacity: 0;
+  }
+
+  .is-done &,
+  .is-passed & {
     border-color: var(--sd-blue);
     background: var(--sd-blue);
   }
 
   .is-current & {
     border-color: var(--sd-pink);
+  }
+
+  .is-active & {
+    border-color: var(--sd-pink);
     background: var(--sd-pink);
-    box-shadow: 0 0 0 5px rgb(236 54 126 / 18%);
+    box-shadow: 0 0 0 6px rgb(236 54 126 / 18%);
+    transform: scale(1.15);
+
+    &::after {
+      animation: milestone-ping 1.8s ease-out infinite;
+    }
+  }
+
+  .item:hover &,
+  .marker:focus-visible & {
+    transform: scale(1.3);
+    border-color: var(--sd-pink);
+    box-shadow: 0 0 0 7px rgb(236 54 126 / 14%);
   }
 }
 
+// ── Card ────────────────────────────────────────────────────────────────
 .content {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -52,10 +117,48 @@
   border: 1px solid var(--sd-border);
   border-radius: var(--sd-radius-card);
   background: var(--sd-page);
+  cursor: pointer;
+  transition:
+    transform 0.35s $ease,
+    box-shadow 0.35s $ease,
+    border-color 0.3s ease,
+    background-color 0.3s ease;
 
-  .is-current & {
+  // Little pointer from the card to its circle.
+  &::before {
+    content: '';
+    position: absolute;
+    top: 9px;
+    left: -7px;
+    width: 12px;
+    height: 12px;
+    border-bottom: 1px solid var(--sd-border);
+    border-left: 1px solid var(--sd-border);
+    background: inherit;
+    transform: rotate(45deg);
+    transition:
+      border-color 0.3s ease,
+      background-color 0.3s ease;
+  }
+
+  .item:hover & {
+    transform: translateX(6px) translateY(-3px);
+    border-color: rgb(236 54 126 / 45%);
+    box-shadow: 0 16px 34px rgb(20 43 75 / 10%);
+
+    &::before {
+      border-color: rgb(236 54 126 / 45%);
+    }
+  }
+
+  .is-active & {
     border-color: var(--sd-pink);
     background: var(--sd-pink-tint);
+    box-shadow: 0 14px 30px rgb(236 54 126 / 14%);
+
+    &::before {
+      border-color: var(--sd-pink);
+    }
   }
 }
 
@@ -63,4 +166,48 @@
   font-size: 12px;
   font-weight: 700;
   color: var(--sd-pink-text);
+  transition: letter-spacing 0.35s $ease;
+
+  .item:hover & {
+    letter-spacing: 0.04em;
+  }
+}
+
+.title {
+  transition: color 0.3s ease;
+
+  .item:hover &,
+  .is-active & {
+    color: var(--sd-pink-text);
+  }
+}
+
+@keyframes milestone-ping {
+  0% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(2.4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline::after,
+  .dot,
+  .content,
+  .period,
+  .title {
+    transition: none;
+  }
+
+  .is-active .dot::after {
+    animation: none;
+  }
+
+  .item:hover .content {
+    transform: none;
+  }
 }

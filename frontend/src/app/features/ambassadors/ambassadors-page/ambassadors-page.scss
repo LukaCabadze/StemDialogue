@@ -1,16 +1,16 @@
 @use 'mixins' as *;
 
-.intro {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 56px;
-  align-items: start;
-  padding-block: 56px var(--sd-space-88);
+.manifesto {
+  padding-block: 24px 96px;
 
   @include tablet-down {
-    grid-template-columns: 1fr;
-    gap: 32px;
+    padding-block: 72px 88px;
   }
+}
+
+.body {
+  max-width: 720px;
+  margin: 56px auto 0;
 }
 
 .grid {

@@ -10,6 +10,102 @@
   padding-block: 56px var(--sd-space-88);
 }
 
+// Both columns are as tall as the timeline, so the story runs down to the last stage.
+.layout {
+  align-items: stretch;
+}
+
+.story {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+.chapters {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 48px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chapter {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 24px;
+  border-top: 1px solid var(--sd-border);
+
+  // Each chapter slides in as it scrolls into view (browsers without scroll timelines show it as is).
+  @supports (animation-timeline: view()) {
+    animation: chapter-in linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 70%;
+  }
+}
+
+.chapter-label {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sd-pink-text);
+}
+
+.chapter-number {
+  font-size: 22px;
+  letter-spacing: 0;
+  color: var(--sd-pink);
+}
+
+.chapter-text {
+  margin: 0;
+  font-size: clamp(24px, 2vw, 32px);
+  font-weight: 700;
+  line-height: 1.38;
+  letter-spacing: -0.015em;
+  color: var(--sd-ink);
+}
+
+.timeline-column {
+  // When the story is the taller column, the timeline stays in view beside it.
+  > .timeline-sticky {
+    position: sticky;
+    top: calc(var(--sd-header-height) + 24px);
+  }
+}
+
+.timeline-hint {
+  margin: 0 0 16px 40px;
+  font-size: 13px;
+  color: var(--sd-muted);
+}
+
+@keyframes chapter-in {
+  from {
+    opacity: 0.15;
+    transform: translateY(48px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chapter {
+    animation: none;
+  }
+}
+
 .funding {
   display: grid;
   grid-template-columns: minmax(0, 398px) minmax(0, 1fr);

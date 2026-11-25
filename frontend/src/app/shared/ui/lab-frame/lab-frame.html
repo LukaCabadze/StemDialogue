@@ -1,0 +1,67 @@
+<div class="content">
+  <ng-content />
+</div>
+
+@if (frame(); as f) {
+  <svg
+    class="art"
+    aria-hidden="true"
+    focusable="false"
+    [attr.viewBox]="f.viewBox"
+    [attr.width]="f.width"
+    [attr.height]="f.height"
+  >
+    <defs>
+      <clipPath [attr.id]="clip.leftId"><path [attr.d]="f.left.body" /></clipPath>
+      <clipPath [attr.id]="clip.rightId"><path [attr.d]="f.right.body" /></clipPath>
+    </defs>
+
+    <!-- Liquid band along the bottom edge -->
+    <g class="band">
+      <path class="wave wave--band-back" [attr.d]="f.band.back" />
+      <path class="wave wave--band-front" [attr.d]="f.band.front" />
+    </g>
+
+    <!-- Glass tube: dark outline, light glass, blue liquid flowing inside -->
+    <path class="tube tube--outer" pathLength="1" [attr.d]="f.tube" />
+    <path class="tube tube--inner" pathLength="1" [attr.d]="f.tube" />
+    <path class="tube-flow" [attr.d]="f.tube" />
+
+    @for (flask of [f.left, f.right]; track $index) {
+      <g class="flask">
+        @if (flask.arm; as arm) {
+          <line class="arm arm--outer" [attr.x1]="arm.x1" [attr.y1]="arm.y1" [attr.x2]="arm.x2" [attr.y2]="arm.y2" />
+          <line class="arm arm--inner" [attr.x1]="arm.x1" [attr.y1]="arm.y1" [attr.x2]="arm.x2" [attr.y2]="arm.y2" />
+        }
+        <path class="glass" [attr.d]="flask.body" />
+        <g [attr.clip-path]="$index === 0 ? clip.left : clip.right">
+          <g class="liquid">
+            <path class="wave wave--a liquid-back" [attr.d]="flask.back" />
+            <path class="wave wave--b liquid-front" [attr.d]="flask.front" />
+            @for (bubble of flask.bubbles; track $index) {
+              <circle
+                class="bubble"
+                [attr.cx]="bubble.cx"
+                [attr.cy]="bubble.cy"
+                [attr.r]="bubble.r"
+                [style.animation-delay]="bubble.delay + 's'"
+              />
+            }
+          </g>
+        </g>
+        <path class="outline" [attr.d]="flask.body" />
+        <rect
+          class="rim"
+          rx="7"
+          [attr.x]="flask.rim.x"
+          [attr.y]="flask.rim.y"
+          [attr.width]="flask.rim.width"
+          [attr.height]="flask.rim.height"
+        />
+        @if (flask.drop; as drop) {
+          <circle class="drop" [attr.cx]="drop.cx" [attr.cy]="drop.cy" [attr.r]="drop.r" />
+        }
+      </g>
+    }
+  </svg>
+}

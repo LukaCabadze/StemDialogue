@@ -9,8 +9,9 @@
   padding-block: var(--sd-section-gap);
 }
 
+/** Kept for semantics; the paper grid shows through every section. */
 .sd-section--soft {
-  background: var(--sd-soft);
+  background: transparent;
 }
 
 .sd-stack {

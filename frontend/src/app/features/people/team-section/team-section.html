@@ -19,17 +19,5 @@
 @if (asTable()) {
   <sd-staff-table [members]="item.current" [caption]="item.title" />
 } @else {
-  <ul class="grid" role="list">
-    @for (member of item.current; track member.slug) {
-      <li>
-        <sd-person-card
-          [name]="member.fullName"
-          [photo]="member.photo"
-          [role]="member.roleTitle"
-          [description]="description(member)"
-          [path]="member.path"
-        />
-      </li>
-    }
-  </ul>
+  <sd-person-deck [people]="deck()" [label]="item.title" />
 }

@@ -11,6 +11,7 @@ import { SeoService } from '../../../core/seo/seo.service';
 import { EmptyState } from '../../../shared/ui/empty-state/empty-state';
 import { ErrorState } from '../../../shared/ui/error-state/error-state';
 import { EventCard } from '../../../shared/ui/event-card/event-card';
+import { LabFrame } from '../../../shared/ui/lab-frame/lab-frame';
 import { LoadMore } from '../../../shared/ui/load-more/load-more';
 import { LoadingState } from '../../../shared/ui/loading-state/loading-state';
 import { PageHero } from '../../../shared/ui/page-hero/page-hero';
@@ -23,7 +24,7 @@ const PAGE_SIZE = 12;
 /** STEM Saturdays listing with URL-synchronised filters (`?scope=Past&year=2026&discipline=…`). */
 @Component({
   selector: 'sd-events-page',
-  imports: [EmptyState, ErrorState, EventCard, EventFilters, LoadMore, LoadingState, PageHero],
+  imports: [EmptyState, ErrorState, EventCard, EventFilters, LabFrame, LoadMore, LoadingState, PageHero],
   templateUrl: './events-page.html',
   styleUrl: './events-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -16,6 +16,7 @@ Double-click **`start-all.cmd`** — it opens two windows:
 
 - API → http://localhost:5080 (Swagger at `/swagger`, local SQLite database created automatically)
 - Website → http://localhost:4200 (proxies `/api` and `/media` to the API)
+- Admin panel (CMS) → http://localhost:4200/projects/school2university/admin (`/admin` also redirects there) — local login `admin@stemdialogue.test` / `Local-demo-only-42`
 
 Or start them separately with `start-backend.cmd` and `start-frontend.cmd`.
 

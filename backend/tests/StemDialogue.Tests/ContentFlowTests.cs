@@ -231,6 +231,17 @@ public sealed class ContentFlowTests(ApiFactory factory) : IClassFixture<ApiFact
     }
 
     [Fact]
+    public async Task Admin_project_list_exposes_the_id_needed_for_role_assignments()
+    {
+        var admin = await factory.AdminAsync();
+        var list = await (await admin.GetAsync("/api/v1/admin/projects")).JsonAsync();
+        var detail = await (await admin.GetAsync(Admin)).JsonAsync();
+
+        var item = Assert.Single(list.EnumerateArray(), p => p.Str("slug") == ApiFactory.Project);
+        Assert.Equal(detail.Str("id"), item.Str("id"));
+    }
+
+    [Fact]
     public async Task Team_page_separates_official_core_team_from_other_sections()
     {
         var team = await (await factory.Anonymous().GetAsync(Public + "/team")).JsonAsync();

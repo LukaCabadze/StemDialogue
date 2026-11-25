@@ -1,0 +1,75 @@
+<div class="adm-app" [class.is-menu-open]="menuOpen()">
+  <aside class="adm-side" aria-label="ადმინისტრირების მენიუ">
+    <a class="adm-brand" [routerLink]="'' | admUrl">
+      <img src="brand/symbol.png" alt="" width="32" height="32" />
+      <span>
+        <b>STEM Dialogue</b>
+        <small>მართვის პანელი</small>
+      </span>
+    </a>
+
+    @if (projects().length > 1) {
+      <label class="adm-side__project">
+        <span>პროექტი</span>
+        <select [value]="project.slug()" (change)="switchProject($any($event.target).value)">
+          @for (p of projects(); track p.slug) {
+            <option [value]="p.slug">{{ p.code }} — {{ p.name }}</option>
+          }
+        </select>
+      </label>
+    } @else if (projects().length === 1) {
+      <p class="adm-side__project-name">{{ projects()[0].code }}</p>
+    }
+
+    <nav>
+      @for (group of groups; track group.title) {
+        @if (!group.adminOnly || auth.isAdmin()) {
+          @if (group.title) {
+            <h2 class="adm-side__title">{{ group.title }}</h2>
+          }
+          <ul role="list">
+            @for (link of group.links; track link.path) {
+              <li>
+                <a
+                  [routerLink]="link.path | admUrl"
+                  routerLinkActive="is-active"
+                  [routerLinkActiveOptions]="{ exact: !!link.exact }"
+                  (click)="menuOpen.set(false)"
+                  >{{ link.label }}</a
+                >
+              </li>
+            }
+          </ul>
+        }
+      }
+    </nav>
+  </aside>
+
+  <div class="adm-main">
+    <header class="adm-top">
+      <button type="button" class="adm-icon-btn adm-top__menu" aria-label="მენიუ" (click)="menuOpen.set(!menuOpen())">☰</button>
+      <a class="adm-top__site" [href]="publicUrl()" target="_blank" rel="noopener">საიტის ნახვა ↗</a>
+      <span class="adm-top__spacer"></span>
+      @if (auth.user(); as user) {
+        <a class="adm-top__user" [routerLink]="'account' | admUrl" title="ანგარიში და პაროლი">
+          <b>{{ user.fullName }}</b>
+          <small>{{ auth.isAdmin() ? 'ადმინისტრატორი' : 'რედაქტორი' }}</small>
+        </a>
+      }
+      <button type="button" class="adm-btn adm-btn--sm adm-btn--ghost" (click)="logout()">გასვლა</button>
+    </header>
+
+    <main class="adm-content">
+      <router-outlet />
+    </main>
+  </div>
+
+  <div class="adm-toasts" aria-live="polite">
+    @for (toast of toasts.items(); track toast.id) {
+      <div class="adm-toast" [attr.data-kind]="toast.kind">
+        <span>{{ toast.text }}</span>
+        <button type="button" class="adm-icon-btn" aria-label="დახურვა" (click)="toasts.dismiss(toast.id)">✕</button>
+      </div>
+    }
+  </div>
+</div>

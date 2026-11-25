@@ -77,6 +77,30 @@ Rules the code follows:
   components only receive inputs.
 - Every URL in the app is the `path` the API returns, so links always match the backend's routing.
 
+## Admin panel (`/projects/{projectSlug}/admin`)
+
+The CMS lives next to the project it edits — `/projects/school2university/admin` (the short `/admin` redirects there) — under `src/app/admin/`. It is lazy-loaded, so none of it ships with the public pages.
+It covers every endpoint of the backend admin API: dashboard, news (draft / publish / schedule / archive),
+STEM Saturdays with their lifecycle (publish, postpone, cancel, restore, complete with recap, recording and photos),
+people with multiple roles, resources, STEM ambassador activities, pages, milestones, media library, tags and
+disciplines, organizations, project & funding settings, users and the audit log. The interface is in Georgian;
+every text field has a Georgian and an optional English value, and API validation messages are shown in Georgian.
+
+- Sign-in uses the API's JWT access token (kept in memory) and the rotating HttpOnly refresh cookie; a 401 refreshes
+  the session once and retries. The admin area has its own HttpClient, separate from the public one.
+- Editors keep the concurrency stamp and show a clear message when someone else saved first (409).
+  Leaving a page with unsaved changes asks for confirmation.
+- Dates are entered in Tbilisi time and sent to the API as UTC.
+
+```
+src/app/admin/
+├─ admin.routes.ts   routes, guards and the admin-only providers
+├─ core/             API client, auth + interceptor, lookups, editor/list base classes, time and error helpers
+├─ layout/           shell (sidebar, top bar, toasts) and the admin stylesheets
+├─ ui/               bilingual field, rich-text editor, media field / gallery / picker, chips, pager, badges
+└─ pages/            one file per screen
+```
+
 ## Content that is not in the API
 
 Interface wording (navigation fallbacks, section overlines, the three STEM Ambassador steps, empty

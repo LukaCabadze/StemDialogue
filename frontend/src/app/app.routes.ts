@@ -1,5 +1,5 @@
 import { inject } from '@angular/core';
-import { Routes } from '@angular/router';
+import { Router, Routes, UrlSegment } from '@angular/router';
 
 import { APP_ENVIRONMENT } from './core/config/app-environment.token';
 import { projectSlugGuard } from './core/project/project-slug.guard';
@@ -11,6 +11,21 @@ export const routes: Routes = [
     path: '',
     pathMatch: 'full',
     redirectTo: () => `/projects/${inject(APP_ENVIRONMENT).defaultProjectSlug}`,
+  },
+  {
+    // Content management for one project, next to its public pages (lazy-loaded; nothing of it
+    // ships with the public site). Must come before the public project route below.
+    path: 'projects/:projectSlug/admin',
+    loadChildren: () => import('./admin/admin.routes').then((m) => m.adminRoutes),
+  },
+  {
+    // Shortcut: /admin/... → /projects/{default project}/admin/...
+    matcher: (segments: UrlSegment[]) => (segments[0]?.path === 'admin' ? { consumed: segments } : null),
+    redirectTo: ({ url, queryParams }) =>
+      inject(Router).createUrlTree(
+        ['/projects', inject(APP_ENVIRONMENT).defaultProjectSlug, ...url.map((segment) => segment.path)],
+        { queryParams },
+      ),
   },
   {
     path: 'projects/:projectSlug',

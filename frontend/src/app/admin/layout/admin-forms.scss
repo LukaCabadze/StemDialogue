@@ -1,0 +1,138 @@
+// CMS editor layout: bilingual fields, form grids, editor columns, save bar and repeating rows.
+
+.adm-ltext {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 6px 8px;
+  align-items: start;
+}
+
+.adm-ltext__lang {
+  padding-top: 9px;
+  color: var(--adm-muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.adm-lang-tabs {
+  display: inline-flex;
+  margin-left: auto;
+  border: 1px solid var(--sd-border-strong);
+  border-radius: 6px;
+  overflow: hidden;
+
+  button {
+    padding: 2px 10px;
+    border: 0;
+    background: #fff;
+    font-size: 12px;
+
+    &.is-on {
+      background: var(--adm-accent);
+      color: #fff;
+    }
+  }
+}
+
+.adm-grid {
+  display: grid;
+  gap: 0 16px;
+}
+
+.adm-grid--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.adm-grid--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 700px) {
+  .adm-grid--2,
+  .adm-grid--3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.adm-editor {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .adm-editor {
+    grid-template-columns: 1fr;
+  }
+}
+
+.adm-editor__side {
+  position: sticky;
+  top: 72px;
+}
+
+.adm-savebar {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 248px;
+  z-index: 6;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px 24px;
+  background: rgb(255 255 255 / 0.96);
+  border-top: 1px solid var(--adm-line);
+  box-shadow: 0 -4px 16px rgb(20 43 75 / 0.06);
+}
+
+@media (max-width: 900px) {
+  .adm-savebar {
+    left: 0;
+    padding: 10px 16px;
+  }
+}
+
+// Repeating rows (roles, links, participants, partners)
+.adm-rows {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.adm-row {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--adm-line);
+  border-radius: 8px;
+  background: var(--sd-soft);
+}
+
+.adm-row__line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+
+  > * {
+    flex: 1 1 160px;
+  }
+
+  > .adm-icon-btn,
+  > .adm-check,
+  > .adm-btn {
+    flex: 0 0 auto;
+    margin: 0;
+  }
+}
+
+.adm-row__label {
+  display: grid;
+  gap: 2px;
+  font-size: 12px;
+  color: var(--adm-muted);
+}
+

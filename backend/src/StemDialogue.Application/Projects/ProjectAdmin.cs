@@ -33,6 +33,8 @@ public sealed record ProjectUpdateRequest(
     IReadOnlyList<SocialLinkInput>? SocialLinks,
     Guid ConcurrencyStamp);
 
+public sealed record ProjectAdminListItem(Guid Id, string Slug, string Code, string Name, ProjectStatus Status, DateOnly StartDate, DateOnly EndDate, string Path);
+
 public sealed record PartnerAdminDto(Guid OrganizationId, string OrganizationName, PartnerRole Role, LocalizedTextDto RoleLabel, bool ShowInHeader, int DisplayOrder);
 
 public sealed record ProjectAdminDto(
@@ -101,9 +103,10 @@ public sealed class ProjectAdminService(
     ContentReferences references,
     IFileStorage storage)
 {
-    public async Task<IReadOnlyList<ProjectSummaryDto>> ListAsync(CancellationToken ct) =>
+    /// <summary>Includes the id, which person role assignments (<c>PersonRoleInput.ProjectId</c>) need.</summary>
+    public async Task<IReadOnlyList<ProjectAdminListItem>> ListAsync(CancellationToken ct) =>
         (await db.Projects.AsNoTracking().OrderByDescending(p => p.StartDate).ToListAsync(ct))
-        .Select(p => new ProjectSummaryDto(p.Slug, p.Code, p.Name.Ka, p.Status, p.StartDate, p.EndDate, PublicPaths.Project(p.Slug)))
+        .Select(p => new ProjectAdminListItem(p.Id, p.Slug, p.Code, p.Name.Ka, p.Status, p.StartDate, p.EndDate, PublicPaths.Project(p.Slug)))
         .ToList();
 
     public async Task<ProjectAdminDto> GetAsync(string slug, CancellationToken ct)

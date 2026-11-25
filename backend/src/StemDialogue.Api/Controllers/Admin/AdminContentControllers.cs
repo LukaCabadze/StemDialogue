@@ -25,7 +25,7 @@ public abstract class AdminApiController : ControllerBase;
 public sealed class AdminProjectsController(ProjectAdminService projects) : AdminApiController
 {
     [HttpGet]
-    public Task<IReadOnlyList<ProjectSummaryDto>> List(CancellationToken ct) => projects.ListAsync(ct);
+    public Task<IReadOnlyList<ProjectAdminListItem>> List(CancellationToken ct) => projects.ListAsync(ct);
 
     [HttpGet("{projectSlug}")]
     public Task<ProjectAdminDto> Get(string projectSlug, CancellationToken ct) => projects.GetAsync(projectSlug, ct);

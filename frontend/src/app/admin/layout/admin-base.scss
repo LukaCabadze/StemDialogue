@@ -1,0 +1,316 @@
+// CMS base: tokens, typography helpers, buttons, cards, alerts, forms, dialogs and the sign-in page.
+// Global (ViewEncapsulation.None) but every selector is prefixed with `adm-`.
+
+.adm-app,
+.adm-login,
+.adm-dialog {
+  --adm-bg: #f3f5f9;
+  --adm-surface: #ffffff;
+  --adm-line: var(--sd-border);
+  --adm-text: var(--sd-ink);
+  --adm-muted: var(--sd-muted);
+  --adm-accent: var(--sd-blue);
+  --adm-danger: var(--sd-status-cancelled);
+  --adm-ok: var(--sd-status-completed);
+  --adm-warn: var(--sd-status-postponed);
+  --adm-radius: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--adm-text);
+}
+
+// ---- Text helpers ---------------------------------------------------------------------------------
+
+.adm-hint {
+  margin: 0;
+  color: var(--adm-muted);
+  font-size: 12.5px;
+}
+
+.adm-req {
+  margin-left: 2px;
+  color: var(--adm-danger);
+}
+
+.adm-error-text {
+  margin: 8px 0 0;
+  color: var(--adm-danger);
+}
+
+// ---- Buttons -------------------------------------------------------------------------------------
+
+.adm-btn {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--sd-border-strong);
+  border-radius: 8px;
+  background: var(--adm-surface);
+  color: var(--adm-text);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    border-color: var(--adm-accent);
+    color: var(--adm-accent);
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+}
+
+.adm-btn--primary {
+  border-color: var(--adm-accent);
+  background: var(--adm-accent);
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    background: var(--sd-blue-deep);
+    color: #fff;
+  }
+}
+
+.adm-btn--danger {
+  border-color: var(--sd-status-cancelled-border);
+  color: var(--adm-danger);
+
+  &:hover:not(:disabled) {
+    border-color: var(--adm-danger);
+    background: var(--sd-status-cancelled-bg);
+    color: var(--adm-danger);
+  }
+}
+
+.adm-btn--ghost {
+  border-color: transparent;
+  background: transparent;
+}
+
+.adm-btn--sm {
+  min-height: 30px;
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+.adm-btn--block {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.adm-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background: rgb(0 0 0 / 0.07);
+  }
+
+  &:disabled {
+    opacity: 0.35;
+  }
+}
+
+.adm-icon-btn--danger {
+  color: var(--adm-danger);
+}
+
+// ---- Cards, alerts, badges ------------------------------------------------------------------------
+
+.adm-card {
+  margin-bottom: 16px;
+  padding: 20px;
+  border: 1px solid var(--adm-line);
+  border-radius: var(--adm-radius);
+  background: var(--adm-surface);
+
+  > .adm-field:last-child,
+  > .adm-check:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.adm-card__title {
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+.adm-card__toggle {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.adm-card__body {
+  margin-top: 16px;
+}
+
+.adm-alert {
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border: 1px solid;
+  border-radius: var(--adm-radius);
+
+  p,
+  ul {
+    margin: 4px 0 0;
+  }
+
+  a {
+    display: inline-block;
+    margin-top: 4px;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+}
+
+.adm-alert--danger {
+  border-color: var(--sd-status-cancelled-border);
+  background: var(--sd-status-cancelled-bg);
+  color: var(--adm-danger);
+}
+
+.adm-alert--warn {
+  border-color: #f0d49a;
+  background: var(--sd-status-postponed-bg);
+  color: #6b4000;
+}
+
+.adm-alert--info {
+  border-color: var(--sd-border-strong);
+  background: var(--sd-blue-tint);
+  color: var(--sd-blue-deep);
+}
+
+// ---- Forms ---------------------------------------------------------------------------------------
+
+.adm-app,
+.adm-login,
+.adm-dialog {
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
+  input[type='url'],
+  input[type='search'],
+  input[type='number'],
+  input[type='date'],
+  input[type='datetime-local'],
+  select,
+  textarea {
+    width: 100%;
+    min-height: 36px;
+    padding: 7px 10px;
+    border: 1px solid var(--sd-border-strong);
+    border-radius: 8px;
+    background: #fff;
+    font-size: 14px;
+    line-height: 1.4;
+
+    &:focus {
+      border-color: var(--adm-accent);
+      outline: 2px solid rgb(8 69 181 / 0.15);
+      outline-offset: 0;
+    }
+  }
+
+  .adm-toolbar select {
+    width: auto;
+    min-width: 160px;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  input[type='checkbox'] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--adm-accent);
+  }
+}
+
+.adm-field {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.adm-field--end {
+  align-content: end;
+}
+
+.adm-field__label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.adm-check {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 14px;
+  cursor: pointer;
+}
+
+// ---- Login ---------------------------------------------------------------------------------------
+
+.adm-login {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 16px;
+  background: var(--sd-night);
+}
+
+.adm-login__card {
+  display: grid;
+  gap: 4px;
+  width: min(400px, 100%);
+  padding: 32px;
+  border-radius: 16px;
+  background: #fff;
+
+  img {
+    margin-bottom: 8px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  .adm-hint {
+    margin-bottom: 16px;
+  }
+}
+
+.adm-login__back {
+  margin-top: 16px;
+  color: var(--adm-muted);
+  font-size: 13px;
+  text-align: center;
+}
+
